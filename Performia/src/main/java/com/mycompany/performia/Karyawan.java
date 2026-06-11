@@ -27,3 +27,4 @@ public class Karyawan extends Pengguna{
     }
 } //niggers
 // tes
+// tes 2
