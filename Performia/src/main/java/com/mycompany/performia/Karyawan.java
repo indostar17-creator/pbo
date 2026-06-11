@@ -25,5 +25,4 @@ public class Karyawan extends Pengguna{
     public int getTotalXP(){
             return this.totalXP;
     }
-} //niggers
-// tes
+}

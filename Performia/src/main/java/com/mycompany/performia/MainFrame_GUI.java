@@ -4,6 +4,9 @@
  */
 package com.mycompany.performia;
 
+import java.awt.CardLayout;
+
+
 /**
  *
  * @author ARTHES
@@ -11,12 +14,27 @@ package com.mycompany.performia;
 public class MainFrame_GUI extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame_GUI.class.getName());
+    private final CardLayout cardLayout;
 
     /**
      * Creates new form MainFrame_GUI
      */
     public MainFrame_GUI() {
         initComponents();
+        cardLayout = new CardLayout();
+        panelMenu.setLayout(cardLayout);
+
+        PanelDashboard_GUI dashboard = new PanelDashboard_GUI();
+        PanelAssignment_GUI assignment = new PanelAssignment_GUI();
+        PanelRiwayat_GUI historyAssignment = new PanelRiwayat_GUI();
+        PanelPerformance_GUI performance = new PanelPerformance_GUI();
+        PanelRanking_GUI ranking = new PanelRanking_GUI();
+
+        panelMenu.add(dashboard, "Dashboard");
+        panelMenu.add(assignment, "Assignment");
+        panelMenu.add(historyAssignment, "History Assignment");
+        panelMenu.add(performance, "Performance");
+        panelMenu.add(ranking, "Ranking");
     }
 
     /**
@@ -28,21 +46,124 @@ public class MainFrame_GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelMenu = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuDashboard = new javax.swing.JMenu();
+        menuAssignment = new javax.swing.JMenu();
+        menuHistoryAssignment = new javax.swing.JMenu();
+        menuPerformance = new javax.swing.JMenu();
+        menuRanking = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panelMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelMenu.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                panelMenuAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
+        panelMenu.setLayout(panelMenuLayout);
+        panelMenuLayout.setHorizontalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 681, Short.MAX_VALUE)
+        );
+        panelMenuLayout.setVerticalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 476, Short.MAX_VALUE)
+        );
+
+        menuDashboard.setText("Dashboard");
+        menuDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuDashboardMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuDashboard);
+
+        menuAssignment.setText("Assignment");
+        menuAssignment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuAssignmentMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuAssignment);
+
+        menuHistoryAssignment.setText("History Assignment");
+        menuHistoryAssignment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuHistoryAssignmentMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuHistoryAssignment);
+
+        menuPerformance.setText("Performance");
+        menuPerformance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuPerformanceMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuPerformance);
+
+        menuRanking.setText("Ranking");
+        menuRanking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuRankingMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuRanking);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    private void menuDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDashboardMouseClicked
+        cardLayout.show(panelMenu, "Dashboard");
+    }//GEN-LAST:event_menuDashboardMouseClicked
+
+    private void panelMenuAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_panelMenuAncestorAdded
+
+    }//GEN-LAST:event_panelMenuAncestorAdded
+
+    private void menuAssignmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAssignmentMouseClicked
+        cardLayout.show(panelMenu, "Assignment");
+    }//GEN-LAST:event_menuAssignmentMouseClicked
+
+    private void menuHistoryAssignmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHistoryAssignmentMouseClicked
+        cardLayout.show(panelMenu, "History Assignment");
+    }//GEN-LAST:event_menuHistoryAssignmentMouseClicked
+
+    private void menuPerformanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPerformanceMouseClicked
+        cardLayout.show(panelMenu, "Performance");
+    }//GEN-LAST:event_menuPerformanceMouseClicked
+
+    private void menuRankingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuRankingMouseClicked
+        cardLayout.show(panelMenu, "Ranking");
+    }//GEN-LAST:event_menuRankingMouseClicked
 
     /**
      * @param args the command line arguments
@@ -70,5 +191,12 @@ public class MainFrame_GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menuAssignment;
+    private javax.swing.JMenu menuDashboard;
+    private javax.swing.JMenu menuHistoryAssignment;
+    private javax.swing.JMenu menuPerformance;
+    private javax.swing.JMenu menuRanking;
+    private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 }
