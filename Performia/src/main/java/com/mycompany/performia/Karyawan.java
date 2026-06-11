@@ -26,3 +26,4 @@ public class Karyawan extends Pengguna{
             return this.totalXP;
     }
 } //niggers
+// tes
