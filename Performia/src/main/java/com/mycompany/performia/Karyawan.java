@@ -11,11 +11,11 @@ package com.mycompany.performia;
 public class Karyawan extends Pengguna {
     private String idDivisi;
     private int totalXP;
-
+  
     public Karyawan(String idUser, String nama, String email, String password, String idDivisi, int totalXP) {
         super(idUser, nama, email, password);
         this.idDivisi = idDivisi;
-        this.totalXP = totalXP;
+        this.totalXP = totalXP;        
     }
 
     public void tambahXP(int poin) {

@@ -35,6 +35,8 @@ public class MainFrame_GUI extends javax.swing.JFrame {
         panelMenu.add(historyAssignment, "History Assignment");
         panelMenu.add(performance, "Performance");
         panelMenu.add(ranking, "Ranking");
+        
+        
     }
 
     /**
