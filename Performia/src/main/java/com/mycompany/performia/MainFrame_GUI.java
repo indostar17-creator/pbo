@@ -21,6 +21,7 @@ public class MainFrame_GUI extends javax.swing.JFrame {
      */
     public MainFrame_GUI() {
         initComponents();
+        setLocationRelativeTo(null);
         cardLayout = new CardLayout();
         panelMenu.setLayout(cardLayout);
 
