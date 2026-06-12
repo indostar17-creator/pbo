@@ -19,7 +19,7 @@ public class Performia {
         listKaryawan.add(k2);
         System.out.println("Stok dummy Karyawan berhasil dimuat!");
         
-        Pengumuman p1 = new Pengumuman("1", "Judul1", "Isi1");
+        Pengumuman p1 = new Pengumuman("1", "Jadwal Rapat", "Waktu: 09:00 WIB");
         Pengumuman p2 = new Pengumuman("2", "Judul2", "Isi2");
         Pengumuman p3 = new Pengumuman("3", "Judul3", "Isi3");
         Pengumuman p4 = new Pengumuman("4", "Judul4", "Isi4");
@@ -42,6 +42,10 @@ public class Performia {
     public String getJudulPengumuman(int indexJudulPengumuman){
         initDummyData();
         return listPengumuman.get(indexJudulPengumuman).getJudul();
+    }
+    public void setIsiPengumuman (int indexIsiPengumuman, String isi){
+        initDummyData();
+        listPengumuman.get(indexIsiPengumuman).setIsi(isi);
     }
     public String getIsiPengumuman(int indexIsiPengumuman){
         initDummyData();

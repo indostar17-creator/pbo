@@ -23,6 +23,9 @@ public class Pengumuman {
         return judul;
     }
     
+    public void setIsi(String isi){
+        this.isi = isi;
+    }
     public String getIsi(){
         return isi;
     }

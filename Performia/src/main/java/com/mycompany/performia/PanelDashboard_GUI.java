@@ -18,7 +18,9 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         Performia k = new Performia();
         labelNama.setText("Selamat Datang, "+ k.getNama(0));
         labelJudulPengumuman.setText(k.getJudulPengumuman(0));
-        labelIsiPengumuman.setText(k.getIsiPengumuman(0));
+        labelIsiPengumuman1.setText(k.getIsiPengumuman(0));
+        k.setIsiPengumuman(0, "Tanggal: Jum'at, 19 Juni 2026");
+        labelIsiPengumuman2.setText(k.getIsiPengumuman(0));
     }
 
     /**
@@ -34,7 +36,8 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         labelJudulPengumuman = new javax.swing.JLabel();
-        labelIsiPengumuman = new javax.swing.JLabel();
+        labelIsiPengumuman1 = new javax.swing.JLabel();
+        labelIsiPengumuman2 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
@@ -43,17 +46,22 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         labelNama.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         labelNama.setText("SELAMAT DATANG, (NAMA) ");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setText("Pengumuman");
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        labelJudulPengumuman.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelJudulPengumuman.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         labelJudulPengumuman.setText("Judul");
         labelJudulPengumuman.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        labelIsiPengumuman.setText("Isi");
-        labelIsiPengumuman.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        labelIsiPengumuman1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsiPengumuman1.setText("Isi");
+        labelIsiPengumuman1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        labelIsiPengumuman2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsiPengumuman2.setText("Isi2");
+        labelIsiPengumuman2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,8 +71,9 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelJudulPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelIsiPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(376, Short.MAX_VALUE))
+                    .addComponent(labelIsiPengumuman1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelIsiPengumuman2, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,8 +81,10 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(labelJudulPengumuman)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelIsiPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(labelIsiPengumuman1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelIsiPengumuman2)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -85,7 +96,7 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 632, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,10 +115,10 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,7 +144,8 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel labelIsiPengumuman;
+    private javax.swing.JLabel labelIsiPengumuman1;
+    private javax.swing.JLabel labelIsiPengumuman2;
     private javax.swing.JLabel labelJudulPengumuman;
     private javax.swing.JLabel labelNama;
     // End of variables declaration//GEN-END:variables
