@@ -15,6 +15,15 @@ public class PanelRiwayat_GUI extends javax.swing.JPanel {
      */
     public PanelRiwayat_GUI() {
         initComponents();
+        String[] namaKolom = {"Tanggal", "Nama Tugas", "Skor XP"};
+        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(namaKolom, 0);
+
+        model.addRow(new Object[]{"12 Jun 2026", "Maintenance website", 150});
+        model.addRow(new Object[]{"10 Jun 2026", "Fixing bug database", 200});
+        model.addRow(new Object[]{"05 Jun 2026", "Update UI Dashboard", 100});
+
+        TabelRiwayat.setModel(model);
+
     }
 
     /**
@@ -29,6 +38,8 @@ public class PanelRiwayat_GUI extends javax.swing.JPanel {
         RiwayatPenugasan = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelRiwayat = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(0, 51, 102));
 
         RiwayatPenugasan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         RiwayatPenugasan.setText("Riwayat Penugasan");
