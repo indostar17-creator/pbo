@@ -18,9 +18,14 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         Performia k = new Performia();
         labelNama.setText("Selamat Datang, "+ k.getNama(0));
         labelJudulPengumuman.setText(k.getJudulPengumuman(0));
+        k.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
         labelIsiPengumuman1.setText(k.getIsiPengumuman(0));
-        k.setIsiPengumuman(0, "Tanggal: Jum'at, 19 Juni 2026");
+        k.setIsiPengumuman(0, "Agenda: Evaluasi kinerja kuartal II dan rencana proyek baru");
         labelIsiPengumuman2.setText(k.getIsiPengumuman(0));
+        k.setIsiPengumuman(0, "Tempat: Ruang Meeting Lantai 2");
+        labelIsiPengumuman3.setText(k.getIsiPengumuman(0));
+        k.setIsiPengumuman(0, "Peserta: Seluruh manajer divisi dan tim proyek (harap hadir tepat waktu)");
+        labelIsiPengumuman4.setText(k.getIsiPengumuman(0));
     }
 
     /**
@@ -38,20 +43,26 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         labelJudulPengumuman = new javax.swing.JLabel();
         labelIsiPengumuman1 = new javax.swing.JLabel();
         labelIsiPengumuman2 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        cbPengumuman = new javax.swing.JComboBox<>();
+        labelIsiPengumuman3 = new javax.swing.JLabel();
+        labelIsiPengumuman4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        cbTugas = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelTugas = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        labelNama.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labelNama.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         labelNama.setText("SELAMAT DATANG, (NAMA) ");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Pengumuman");
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        labelJudulPengumuman.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        labelJudulPengumuman.setFont(new java.awt.Font("Segoe UI Black", 0, 15)); // NOI18N
         labelJudulPengumuman.setText("Judul");
         labelJudulPengumuman.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -63,6 +74,17 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         labelIsiPengumuman2.setText("Isi2");
         labelIsiPengumuman2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        cbPengumuman.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informasi Perusahaan", "Aktivitas Perusahaan", "Perbaikan Aplikasi" }));
+        cbPengumuman.addActionListener(this::cbPengumumanActionPerformed);
+
+        labelIsiPengumuman3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsiPengumuman3.setText("Isi3");
+        labelIsiPengumuman3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        labelIsiPengumuman4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsiPengumuman4.setText("isi4");
+        labelIsiPengumuman4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,37 +92,92 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelJudulPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelIsiPengumuman1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelIsiPengumuman2, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelJudulPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addComponent(cbPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelIsiPengumuman2, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelIsiPengumuman3, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelIsiPengumuman1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelIsiPengumuman4, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelJudulPengumuman)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelJudulPengumuman)
+                    .addComponent(cbPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelIsiPengumuman1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelIsiPengumuman2)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelIsiPengumuman3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelIsiPengumuman4)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
+
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        cbTugas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Hari Ini", "Minggu Ini", " " }));
+        cbTugas.addActionListener(this::cbTugasActionPerformed);
+
+        tabelTugas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Tugas", "Tenggat Waktu"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabelTugas);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Daftar Tugas");
-
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 632, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -109,17 +186,15 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(labelNama, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelNama, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,22 +206,73 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbPengumumanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPengumumanActionPerformed
+        Performia k = new Performia();
+        
+        switch(cbPengumuman.getSelectedIndex()){
+            case 0:
+                labelJudulPengumuman.setText(k.getJudulPengumuman(0));
+                k.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
+                labelIsiPengumuman1.setText(k.getIsiPengumuman(0));
+                k.setIsiPengumuman(0, "Agenda: Evaluasi kinerja kuartal II dan rencana proyek baru");
+                labelIsiPengumuman2.setText(k.getIsiPengumuman(0));
+                k.setIsiPengumuman(0, "Tempat: Ruang Meeting Lantai 2");
+                labelIsiPengumuman3.setText(k.getIsiPengumuman(0));
+                k.setIsiPengumuman(0, "Peserta: Seluruh manajer divisi dan tim proyek (harap hadir tepat waktu)");
+                labelIsiPengumuman4.setText(k.getIsiPengumuman(0));
+                break;
+            case 1:
+                labelJudulPengumuman.setText(k.getJudulPengumuman(1));
+                k.setIsiPengumuman(1, "Perusahaan akan mengadakan pelatihan untuk meningkatkan kemampuan komunikasi efektif dalam tim.");
+                labelIsiPengumuman1.setText(k.getIsiPengumuman(1));
+                k.setIsiPengumuman(1, "Waktu: Jumat, 19 Juni 2026 pukul 09.00–12.00 WIB di Ruang Training.");
+                labelIsiPengumuman2.setText(k.getIsiPengumuman(1));
+                k.setIsiPengumuman(1, "Peserta: Seluruh karyawan divisi pemasaran.");
+                labelIsiPengumuman3.setText(k.getIsiPengumuman(1));
+                k.setIsiPengumuman(1, "Mohon membawa laptop pribadi untuk simulasi praktik.");
+                labelIsiPengumuman4.setText(k.getIsiPengumuman(1));
+                break;
+            case 2:
+                labelJudulPengumuman.setText(k.getJudulPengumuman(2));
+                k.setIsiPengumuman(2, "Kami akan melakukan perbaikan sistem untuk meningkatkan performa aplikasi.");
+                labelIsiPengumuman1.setText(k.getIsiPengumuman(2));
+                k.setIsiPengumuman(2, "Waktu perbaikan: Minggu, 20 Juni 2026 pukul 22.00 – 02.00 WIB.");
+                labelIsiPengumuman2.setText(k.getIsiPengumuman(2));
+                k.setIsiPengumuman(2, "Selama periode tersebut, aplikasi tidak dapat diakses.");
+                labelIsiPengumuman3.setText(k.getIsiPengumuman(2));
+                k.setIsiPengumuman(2, "Mohon selesaikan tugas atau aktivitas penting sebelum waktu perbaikan dimulai.");
+                labelIsiPengumuman4.setText(k.getIsiPengumuman(2));
+                break;
+        }
+    }//GEN-LAST:event_cbPengumumanActionPerformed
+
+    private void cbTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTugasActionPerformed
+        switch(cbTugas.getSelectedIndex()){
+            case 0:
+                
+        }
+    }//GEN-LAST:event_cbTugasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbPengumuman;
+    private javax.swing.JComboBox<String> cbTugas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelIsiPengumuman1;
     private javax.swing.JLabel labelIsiPengumuman2;
+    private javax.swing.JLabel labelIsiPengumuman3;
+    private javax.swing.JLabel labelIsiPengumuman4;
     private javax.swing.JLabel labelJudulPengumuman;
     private javax.swing.JLabel labelNama;
+    private javax.swing.JTable tabelTugas;
     // End of variables declaration//GEN-END:variables
 }
