@@ -4,11 +4,16 @@
  */
 package com.mycompany.performia;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ARTHES
  */
 public class PanelDashboard_GUI extends javax.swing.JPanel {
+    private DefaultTableModel model;
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelDashboard_GUI.class.getName());
 
     /**
      * Creates new form PanelDashboard_GUI
@@ -26,6 +31,32 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         labelIsiPengumuman3.setText(k.getIsiPengumuman(0));
         k.setIsiPengumuman(0, "Peserta: Seluruh manajer divisi dan tim proyek (harap hadir tepat waktu)");
         labelIsiPengumuman4.setText(k.getIsiPengumuman(0));
+        
+        model = (DefaultTableModel) tabelTugas.getModel();
+        
+        String judulTugas1 = k.getJudulTugas(0);
+        String tenggatWaktuTugas1 = k.getTenggatWaktu(0);
+        String judulTugas2 = k.getJudulTugas(1);
+        String tenggatWaktuTugas2 = k.getTenggatWaktu(1);
+        String judulTugas3 = k.getJudulTugas(2);
+        String tenggatWaktuTugas3 = k.getTenggatWaktu(2);
+        String judulTugas4 = k.getJudulTugas(3);
+        String tenggatWaktuTugas4 = k.getTenggatWaktu(3);
+        String judulTugas5 = k.getJudulTugas(4);
+        String tenggatWaktuTugas5 = k.getTenggatWaktu(4);
+        String judulTugas6 = k.getJudulTugas(5);
+        String tenggatWaktuTugas6 = k.getTenggatWaktu(5);
+        String[] daftarTugas = {judulTugas1, tenggatWaktuTugas1,
+            judulTugas2, tenggatWaktuTugas2,
+            judulTugas3,tenggatWaktuTugas3,
+            judulTugas4, tenggatWaktuTugas4, 
+            judulTugas5, tenggatWaktuTugas5, 
+            judulTugas6, tenggatWaktuTugas6};
+        
+        
+        for(int i = 0; i <daftarTugas.length-(daftarTugas.length/2);i++){
+            model.addRow(new Object[]{k.getJudulTugas(i), k.getTenggatWaktu(i)});
+        }
     }
 
     /**
@@ -47,10 +78,10 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         labelIsiPengumuman3 = new javax.swing.JLabel();
         labelIsiPengumuman4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        cbTugas = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelTugas = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelTugas = new javax.swing.JTable();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -94,7 +125,7 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(labelJudulPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addComponent(cbPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -125,17 +156,15 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        cbTugas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Hari Ini", "Minggu Ini", " " }));
-        cbTugas.addActionListener(this::cbTugasActionPerformed);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Hari Ini", "Minggu Ini", " " }));
+        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Daftar Tugas");
 
         tabelTugas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Tugas", "Tenggat Waktu"
@@ -149,23 +178,20 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelTugas);
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Daftar Tugas");
+        jScrollPane2.setViewportView(tabelTugas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -173,11 +199,11 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbTugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -206,8 +232,7 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -251,22 +276,58 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbPengumumanActionPerformed
 
-    private void cbTugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTugasActionPerformed
-        switch(cbTugas.getSelectedIndex()){
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        Performia k = new Performia();
+        String judulTugas1 = k.getJudulTugas(0);
+        String tenggatWaktuTugas1 = k.getTenggatWaktu(0);
+        String judulTugas2 = k.getJudulTugas(1);
+        String tenggatWaktuTugas2 = k.getTenggatWaktu(1);
+        String judulTugas3 = k.getJudulTugas(2);
+        String tenggatWaktuTugas3 = k.getTenggatWaktu(2);
+        String judulTugas4 = k.getJudulTugas(3);
+        String tenggatWaktuTugas4 = k.getTenggatWaktu(3);
+        String judulTugas5 = k.getJudulTugas(4);
+        String tenggatWaktuTugas5 = k.getTenggatWaktu(4);
+        String judulTugas6 = k.getJudulTugas(5);
+        String tenggatWaktuTugas6 = k.getTenggatWaktu(5);
+        String[] daftarTugas = {judulTugas1, tenggatWaktuTugas1,
+            judulTugas2, tenggatWaktuTugas2,
+            judulTugas3,tenggatWaktuTugas3,
+            judulTugas4, tenggatWaktuTugas4, 
+            judulTugas5, tenggatWaktuTugas5, 
+            judulTugas6, tenggatWaktuTugas6};
+        
+        
+        switch(jComboBox1.getSelectedIndex()){
             case 0:
-                
+                model.setRowCount(0);
+                for(int i = 0; i <daftarTugas.length-(daftarTugas.length/2);i++){
+                    model.addRow(new Object[]{k.getJudulTugas(i), k.getTenggatWaktu(i)});
+                }
+                break;
+            case 1:
+                model.setRowCount(0);
+                model.addRow(new Object[]{k.getJudulTugas(3), k.getTenggatWaktu(3)});
+                model.addRow(new Object[]{k.getJudulTugas(4), k.getTenggatWaktu(4)});
+                break;
+            case 2:
+                model.setRowCount(0);
+                model.addRow(new Object[]{k.getJudulTugas(3), k.getTenggatWaktu(3)});
+                model.addRow(new Object[]{k.getJudulTugas(4), k.getTenggatWaktu(4)});
+                model.addRow(new Object[]{k.getJudulTugas(5), k.getTenggatWaktu(5)});
+                break;
         }
-    }//GEN-LAST:event_cbTugasActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbPengumuman;
-    private javax.swing.JComboBox<String> cbTugas;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelIsiPengumuman1;
     private javax.swing.JLabel labelIsiPengumuman2;
     private javax.swing.JLabel labelIsiPengumuman3;
