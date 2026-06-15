@@ -20,6 +20,7 @@ public class MainFrame_GUI extends javax.swing.JFrame {
      * Creates new form MainFrame_GUI
      */
     public MainFrame_GUI() {
+        Performia.initDummyData();
         initComponents();
         setLocationRelativeTo(null);
         cardLayout = new CardLayout();

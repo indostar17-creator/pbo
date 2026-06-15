@@ -15,6 +15,10 @@ public class Performia {
     public static ArrayList<Tugas> listTugas = new ArrayList<>();
     public static void initDummyData() {
         
+        listKaryawan.clear();
+        listPengumuman.clear();
+        listTugas.clear();
+        
         Karyawan k1 = new Karyawan("K01", "Arthes", "arthes@mail", "123", "IT", 1500);
         Karyawan k2 = new Karyawan("K02", "Faiz", "faiz@mail", "123", "IT", 1200);
         listKaryawan.add(k1);
@@ -47,10 +51,8 @@ public class Performia {
     }
     
     public String getNama(int indexKaryawan){
-        initDummyData();
         return listKaryawan.get(indexKaryawan).getNama();
     }
-    
     public String getJudulPengumuman(int indexJudulPengumuman){
         return listPengumuman.get(indexJudulPengumuman).getJudul();
     }
@@ -60,12 +62,22 @@ public class Performia {
     public String getIsiPengumuman(int indexIsiPengumuman){
         return listPengumuman.get(indexIsiPengumuman).getIsi();
     }
-    
     public String getJudulTugas(int indexJudulTugas){
-        initDummyData();
         return listTugas.get(indexJudulTugas).getJudul();
     }
-    public String getTenggatWaktu(int indexTenggatWaktuTugas){
+    public String getTenggatWaktuTugas(int indexTenggatWaktuTugas){
         return listTugas.get(indexTenggatWaktuTugas).getTanggalBatas().toString();
     }
+    public String getTenggatWaktu(int index){
+    return listTugas.get(index).getTanggalBatas().toString();
+}
+    public int getJumlahTugas(){
+    return listTugas.size();
+}
+    public String getTanggalDibuatTugas(int index){
+    return listTugas.get(index).getTanggalDibuat().toString();
+}
+    public String getStatusTugas(int index){
+    return listTugas.get(index).getStatus();
+}
 }

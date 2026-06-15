@@ -17,36 +17,25 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
     public PanelAssignment_GUI() {
     initComponents();
 
+    Performia p = new Performia();
+
     DefaultTableModel model =
             (DefaultTableModel) tabelTugas.getModel();
 
-    model.addRow(new Object[]{
-        "Maintenance the website",
-        "10 Nov 2025",
-        "01 Feb 2026",
-        "On Going"
-    });
+    model.setRowCount(0);
 
-    model.addRow(new Object[]{
-        "Accounting problem report",
-        "19 Dec 2025",
-        "15 Jan 2026",
-        "On Going"
-    });
+    for(int i = 0; i < p.getJumlahTugas(); i++){
 
-    model.addRow(new Object[]{
-        "Fire the rookie",
-        "24 Mar 2025",
-        "01 Aug 2026",
-        "On Going"
-    });
+        model.addRow(new Object[]{
 
-    model.addRow(new Object[]{
-        "Change Division Head",
-        "02 Mar 2025",
-        "20 Apr 2025",
-        "On Going"
-    });
+            p.getJudulTugas(i),
+            p.getTanggalDibuatTugas(i),
+            p.getTenggatWaktuTugas(i),
+            p.getStatusTugas(i)
+
+        });
+
+    }
 }
 
     /**
@@ -186,38 +175,15 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
      int baris = tabelTugas.getSelectedRow();
-
     if (baris == -1) {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Pilih tugas terlebih dahulu!"
-        );
-
+        JOptionPane.showMessageDialog(this,"Pilih tugas terlebih dahulu!");
     } else {
-
-        String link = JOptionPane.showInputDialog(
-                this,
-                "Masukkan link bukti tugas:"
-        );
-
+        String link = JOptionPane.showInputDialog(this,"Masukkan link bukti tugas:");
         if (link != null && !link.isEmpty()) {
-
-            tabelTugas.setValueAt(
-                    "Done",
-                    baris,
-                    3
-            );
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Tugas berhasil disubmit!"
-            );
-
+            tabelTugas.setValueAt("Done",baris,3);
+            JOptionPane.showMessageDialog(this, "Tugas berhasil disubmit!");
+            }
         }
-
-    }
-    
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
