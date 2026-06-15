@@ -30,7 +30,7 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
 
             p.getJudulTugas(i),
             p.getTanggalDibuatTugas(i),
-            p.getTenggatWaktuTugas(i),
+            p.getTenggatWaktu(i),
             p.getStatusTugas(i)
 
         });
@@ -174,16 +174,18 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-     int baris = tabelTugas.getSelectedRow();
-    if (baris == -1) {
-        JOptionPane.showMessageDialog(this,"Pilih tugas terlebih dahulu!");
-    } else {
-        String link = JOptionPane.showInputDialog(this,"Masukkan link bukti tugas:");
-        if (link != null && !link.isEmpty()) {
-            tabelTugas.setValueAt("Done",baris,3);
-            JOptionPane.showMessageDialog(this, "Tugas berhasil disubmit!");
+        Performia p = new Performia();
+        int baris = tabelTugas.getSelectedRow();
+        if (baris == -1) {
+            JOptionPane.showMessageDialog(this,"Pilih tugas terlebih dahulu!");
+        } else {
+            String link = JOptionPane.showInputDialog(this,"Masukkan link bukti tugas:");
+            if (link != null && !link.isEmpty()) {
+                p.setStatusTugas(baris, "Done");
+                tabelTugas.setValueAt(p.getStatusTugas(baris),baris,3);
+                JOptionPane.showMessageDialog(this, "Tugas berhasil disubmit!");
+                }
             }
-        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

@@ -4,6 +4,7 @@
  */
 package com.mycompany.performia;
 
+import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,42 +21,22 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
      */
     public PanelDashboard_GUI() {
         initComponents();
-        Performia k = new Performia();
-        labelNama.setText("Selamat Datang, "+ k.getNama(0));
-        labelJudulPengumuman.setText(k.getJudulPengumuman(0));
-        k.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
-        labelIsiPengumuman1.setText(k.getIsiPengumuman(0));
-        k.setIsiPengumuman(0, "Agenda: Evaluasi kinerja kuartal II dan rencana proyek baru");
-        labelIsiPengumuman2.setText(k.getIsiPengumuman(0));
-        k.setIsiPengumuman(0, "Tempat: Ruang Meeting Lantai 2");
-        labelIsiPengumuman3.setText(k.getIsiPengumuman(0));
-        k.setIsiPengumuman(0, "Peserta: Seluruh manajer divisi dan tim proyek (harap hadir tepat waktu)");
-        labelIsiPengumuman4.setText(k.getIsiPengumuman(0));
+        Performia p = new Performia();
+        labelNama.setText("Selamat Datang, "+ p.getNama(0));
+        labelJudulPengumuman.setText(p.getJudulPengumuman(0));
+        p.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
+        labelIsiPengumuman1.setText(p.getIsiPengumuman(0));
+        p.setIsiPengumuman(0, "Agenda: Evaluasi kinerja kuartal II dan rencana proyek baru");
+        labelIsiPengumuman2.setText(p.getIsiPengumuman(0));
+        p.setIsiPengumuman(0, "Tempat: Ruang Meeting Lantai 2");
+        labelIsiPengumuman3.setText(p.getIsiPengumuman(0));
+        p.setIsiPengumuman(0, "Peserta: Seluruh manajer divisi dan tim proyek (harap hadir tepat waktu)");
+        labelIsiPengumuman4.setText(p.getIsiPengumuman(0));
         
         model = (DefaultTableModel) tabelTugas.getModel();
         
-        String judulTugas1 = k.getJudulTugas(0);
-        String tenggatWaktuTugas1 = k.getTenggatWaktu(0);
-        String judulTugas2 = k.getJudulTugas(1);
-        String tenggatWaktuTugas2 = k.getTenggatWaktu(1);
-        String judulTugas3 = k.getJudulTugas(2);
-        String tenggatWaktuTugas3 = k.getTenggatWaktu(2);
-        String judulTugas4 = k.getJudulTugas(3);
-        String tenggatWaktuTugas4 = k.getTenggatWaktu(3);
-        String judulTugas5 = k.getJudulTugas(4);
-        String tenggatWaktuTugas5 = k.getTenggatWaktu(4);
-        String judulTugas6 = k.getJudulTugas(5);
-        String tenggatWaktuTugas6 = k.getTenggatWaktu(5);
-        String[] daftarTugas = {judulTugas1, tenggatWaktuTugas1,
-            judulTugas2, tenggatWaktuTugas2,
-            judulTugas3,tenggatWaktuTugas3,
-            judulTugas4, tenggatWaktuTugas4, 
-            judulTugas5, tenggatWaktuTugas5, 
-            judulTugas6, tenggatWaktuTugas6};
-        
-        
-        for(int i = 0; i <daftarTugas.length-(daftarTugas.length/2);i++){
-            model.addRow(new Object[]{k.getJudulTugas(i), k.getTenggatWaktu(i)});
+        for (int i = 0; i < p.getJumlahTugas(); i++) {
+            model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
         }
     }
 
@@ -163,7 +144,7 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Hari Ini", "Minggu Ini", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Hari Ini", "Minggu Ini" }));
         jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -285,44 +266,36 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
     }//GEN-LAST:event_cbPengumumanActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        Performia k = new Performia();
-        String judulTugas1 = k.getJudulTugas(0);
-        String tenggatWaktuTugas1 = k.getTenggatWaktu(0);
-        String judulTugas2 = k.getJudulTugas(1);
-        String tenggatWaktuTugas2 = k.getTenggatWaktu(1);
-        String judulTugas3 = k.getJudulTugas(2);
-        String tenggatWaktuTugas3 = k.getTenggatWaktu(2);
-        String judulTugas4 = k.getJudulTugas(3);
-        String tenggatWaktuTugas4 = k.getTenggatWaktu(3);
-        String judulTugas5 = k.getJudulTugas(4);
-        String tenggatWaktuTugas5 = k.getTenggatWaktu(4);
-        String judulTugas6 = k.getJudulTugas(5);
-        String tenggatWaktuTugas6 = k.getTenggatWaktu(5);
-        String[] daftarTugas = {judulTugas1, tenggatWaktuTugas1,
-            judulTugas2, tenggatWaktuTugas2,
-            judulTugas3,tenggatWaktuTugas3,
-            judulTugas4, tenggatWaktuTugas4, 
-            judulTugas5, tenggatWaktuTugas5, 
-            judulTugas6, tenggatWaktuTugas6};
+        Performia p = new Performia();
         
+        LocalDate start = LocalDate.parse("2026-04-20");
+        LocalDate end = LocalDate.parse("2026-04-27");
         
         switch(jComboBox1.getSelectedIndex()){
             case 0:
                 model.setRowCount(0);
-                for(int i = 0; i <daftarTugas.length-(daftarTugas.length/2);i++){
-                    model.addRow(new Object[]{k.getJudulTugas(i), k.getTenggatWaktu(i)});
+                for (int i = 0; i < p.getJumlahTugas(); i++) {
+                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done")){
+                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
+                    }
                 }
                 break;
             case 1:
                 model.setRowCount(0);
-                model.addRow(new Object[]{k.getJudulTugas(3), k.getTenggatWaktu(3)});
-                model.addRow(new Object[]{k.getJudulTugas(4), k.getTenggatWaktu(4)});
+                for (int i = 0; i < p.getJumlahTugas(); i++){
+                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done") && p.getTenggatWaktu(i).equalsIgnoreCase(start.toString())){
+                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
+                    }
+                }
                 break;
             case 2:
                 model.setRowCount(0);
-                model.addRow(new Object[]{k.getJudulTugas(3), k.getTenggatWaktu(3)});
-                model.addRow(new Object[]{k.getJudulTugas(4), k.getTenggatWaktu(4)});
-                model.addRow(new Object[]{k.getJudulTugas(5), k.getTenggatWaktu(5)});
+                for(int i = 0; i < p.getJumlahTugas(); i++){
+                    LocalDate deadline = LocalDate.parse(p.getTenggatWaktu(i));
+                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done") && !deadline.isBefore(start) && !deadline.isAfter(end)){
+                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
+                    }
+                }
                 break;
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed

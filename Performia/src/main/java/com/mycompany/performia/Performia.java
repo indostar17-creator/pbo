@@ -31,7 +31,7 @@ public class Performia {
         listPengumuman.add(p1);
         listPengumuman.add(p2);
         listPengumuman.add(p3);
-       
+        
         Tugas t1 = new Tugas("1", "Maintenance the website", LocalDate.of(2025, 11, 10), LocalDate.of(2026, 02, 01), "On Going");
         Tugas t2 = new Tugas("2", "Accounting problem report", LocalDate.of(2025, 12, 19), LocalDate.of(2026, 01, 15), "On Going");
         Tugas t3 = new Tugas("3", "Fire the rookie", LocalDate.of(2025, 03, 24), LocalDate.of(2026, 8, 1), "On Going");
@@ -65,19 +65,19 @@ public class Performia {
     public String getJudulTugas(int indexJudulTugas){
         return listTugas.get(indexJudulTugas).getJudul();
     }
-    public String getTenggatWaktuTugas(int indexTenggatWaktuTugas){
-        return listTugas.get(indexTenggatWaktuTugas).getTanggalBatas().toString();
-    }
     public String getTenggatWaktu(int index){
-    return listTugas.get(index).getTanggalBatas().toString();
-}
+        return listTugas.get(index).getTanggalBatas().toString();
+    }
     public int getJumlahTugas(){
-    return listTugas.size();
-}
+        return listTugas.size();
+    }
     public String getTanggalDibuatTugas(int index){
-    return listTugas.get(index).getTanggalDibuat().toString();
-}
+        return listTugas.get(index).getTanggalDibuat().toString();
+    }
+    public void setStatusTugas(int index, String statusTugasBaru){
+        listTugas.get(index).setStatus(statusTugasBaru);
+    }
     public String getStatusTugas(int index){
-    return listTugas.get(index).getStatus();
-}
+        return listTugas.get(index).getStatus();
+    }
 }
