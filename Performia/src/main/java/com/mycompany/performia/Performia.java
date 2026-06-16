@@ -19,10 +19,14 @@ public class Performia {
         listPengumuman.clear();
         listTugas.clear();
         
-        Karyawan k1 = new Karyawan("K01", "Arthes", "arthes@mail", "123", "IT", 1500);
+        Karyawan k1 = new Karyawan("K01", "Arthes", "arthes@mail", "123", "IT", 1100); //XP awal diubah ke 1100
         Karyawan k2 = new Karyawan("K02", "Faiz", "faiz@mail", "123", "IT", 1200);
+        Karyawan k3 = new Karyawan("K03", "Zefa", "zefa@mail", "123", "Cleaning Service", 800);
+        Karyawan k4 = new Karyawan("K04", "McSakinah", "mcsakinah@mail", "123", "IT", 900);
         listKaryawan.add(k1);
         listKaryawan.add(k2);
+        listKaryawan.add(k3);
+        listKaryawan.add(k4);
         System.out.println("Stok dummy Karyawan berhasil dimuat!");
         
         Pengumuman p1 = new Pengumuman("1", "Pengumuman Rapat Divisi", "");
