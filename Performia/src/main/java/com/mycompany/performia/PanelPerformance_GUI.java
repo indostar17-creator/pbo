@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author ARTHES
  */
-public final class PanelPerformance_GUI extends javax.swing.JPanel {
+public class PanelPerformance_GUI extends javax.swing.JPanel {
     private int previousCompletedAssignments = -1;
 
     /**
@@ -53,7 +53,7 @@ public final class PanelPerformance_GUI extends javax.swing.JPanel {
 
         for (int i = 0; i < totalTugas; i++) {
             boolean selesai = p.getStatusTugas(i).equalsIgnoreCase("Done");
-            boolean overdue = LocalDate.parse(p.getTenggatWaktu(i)).isBefore(hariIni) && !selesai;
+            boolean overdue = LocalDate.parse(p.getTenggatWaktu(i)).isBefore(hariIni);
 
             if (selesai) {
                 tugasSelesai++;
