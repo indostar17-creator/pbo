@@ -38,7 +38,12 @@ public class MainFrame_GUI extends javax.swing.JFrame {
         panelMenu.add(performance, "Performance");
         panelMenu.add(ranking, "Ranking");
         
-        
+        menuPerformance.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                performance.refreshPerformanceData();
+            }
+        });
     }
 
     /**
