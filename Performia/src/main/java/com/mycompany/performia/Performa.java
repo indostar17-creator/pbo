@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.performia;
+import java.util.Random;
 
 /**
  *
@@ -18,6 +19,9 @@ public class Performa {
     private int totalTugas;
     private int skorPerforma;
     private int totalXP;
+    
+    Random rand = new Random();
+    private static int randomGenTemp = 0;
 
     public Performa() {
         this.onTimeCriteria = new Kriteria("KR-OT", "On-Time", 0.5f);
@@ -44,6 +48,17 @@ public class Performa {
         this.totalXP = totalXP;
     }
     
+    public int generateXP(){ //untuk generate penambahan XP
+        int random = rand.nextInt(1, 21) * 5;
+        randomGenTemp = random;
+        return random;
+    }
+    
+    //utk Riwayat Penambahan XP pake ini
+    public static int getRecentTaskXP(){ //untuk ambil nilai penambahan XP terbaru (untuk ambil data XP task terbaru)
+        return randomGenTemp;
+    }
+        
     public String getIdPerforma(){
         return idPerforma;
     }

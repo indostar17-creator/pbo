@@ -5,12 +5,13 @@
 package com.mycompany.performia;
 import java.awt.Color;
 import java.time.LocalDate;
-import java.util.concurrent.ThreadLocalRandom;
+//import java.util.concurrent.ThreadLocalRandom;
 /**
  *
  * @author ARTHES
  */
 public class PanelPerformance_GUI extends javax.swing.JPanel {
+    Performa pfm = new Performa();
     private int previousCompletedAssignments = -1;
 
     /**
@@ -73,7 +74,8 @@ public class PanelPerformance_GUI extends javax.swing.JPanel {
             int totalBonusXP = 0;
 
             for (int i = 0; i < newlyCompletedAssignments; i++) {
-                totalBonusXP += generateRandomXpBonus();
+//                totalBonusXP += generateRandomXpBonus();
+                totalBonusXP += pfm.generateXP();
             }
 
             Performia.listKaryawan.get(0).tambahXP(totalBonusXP);
@@ -86,6 +88,9 @@ public class PanelPerformance_GUI extends javax.swing.JPanel {
         if (!Performia.listKaryawan.isEmpty()) {
             totalXP = Performia.listKaryawan.get(0).getTotalXP();
         }
+        
+        //COntoh ambil nilai static dari kelas lain
+        int taskXP = Performa.getRecentTaskXP();
 
         updateData(
                 tugasSelesai,
@@ -98,9 +103,9 @@ public class PanelPerformance_GUI extends javax.swing.JPanel {
         );
     }
 
-    private int generateRandomXpBonus() {
-        return ThreadLocalRandom.current().nextInt(1, 21) * 5;
-    }
+//    private int generateRandomXpBonus() {
+//        return ThreadLocalRandom.current().nextInt(1, 21) * 5;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
