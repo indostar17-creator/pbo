@@ -250,10 +250,11 @@ public final class PanelPerformance_GUI extends javax.swing.JPanel {
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
-        jP_HEADER.setBackground(new java.awt.Color(0, 0, 102));
+        jP_HEADER.setBackground(new java.awt.Color(204, 204, 204));
 
         L_Performance.setBackground(new java.awt.Color(255, 255, 255));
         L_Performance.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        L_Performance.setForeground(new java.awt.Color(51, 51, 51));
         L_Performance.setText("Performance");
 
         javax.swing.GroupLayout jP_HEADERLayout = new javax.swing.GroupLayout(jP_HEADER);

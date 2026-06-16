@@ -64,30 +64,37 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelTugas = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(204, 204, 204));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         labelNama.setBackground(new java.awt.Color(255, 255, 255));
         labelNama.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        labelNama.setForeground(new java.awt.Color(51, 51, 51));
         labelNama.setText("SELAMAT DATANG, (NAMA) ");
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Pengumuman");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         labelJudulPengumuman.setBackground(new java.awt.Color(255, 255, 255));
         labelJudulPengumuman.setFont(new java.awt.Font("Segoe UI Black", 0, 15)); // NOI18N
+        labelJudulPengumuman.setForeground(new java.awt.Color(51, 51, 51));
         labelJudulPengumuman.setText("Judul");
         labelJudulPengumuman.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         labelIsiPengumuman1.setBackground(new java.awt.Color(255, 255, 255));
         labelIsiPengumuman1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsiPengumuman1.setForeground(new java.awt.Color(51, 51, 51));
         labelIsiPengumuman1.setText("Isi");
         labelIsiPengumuman1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         labelIsiPengumuman2.setBackground(new java.awt.Color(255, 255, 255));
         labelIsiPengumuman2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsiPengumuman2.setForeground(new java.awt.Color(51, 51, 51));
         labelIsiPengumuman2.setText("Isi2");
         labelIsiPengumuman2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -96,11 +103,13 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
 
         labelIsiPengumuman3.setBackground(new java.awt.Color(255, 255, 255));
         labelIsiPengumuman3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsiPengumuman3.setForeground(new java.awt.Color(51, 51, 51));
         labelIsiPengumuman3.setText("Isi3");
         labelIsiPengumuman3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         labelIsiPengumuman4.setBackground(new java.awt.Color(255, 255, 255));
         labelIsiPengumuman4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelIsiPengumuman4.setForeground(new java.awt.Color(51, 51, 51));
         labelIsiPengumuman4.setText("isi4");
         labelIsiPengumuman4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -142,15 +151,20 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jComboBox1.setForeground(new java.awt.Color(51, 51, 51));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Hari Ini", "Minggu Ini" }));
         jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Daftar Tugas");
 
+        tabelTugas.setBackground(new java.awt.Color(204, 204, 204));
+        tabelTugas.setForeground(new java.awt.Color(51, 51, 51));
         tabelTugas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
