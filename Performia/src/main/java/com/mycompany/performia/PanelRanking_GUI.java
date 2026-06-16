@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.performia;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -16,25 +19,65 @@ public class PanelRanking_GUI extends javax.swing.JPanel {
     public PanelRanking_GUI() {
         initComponents();
         
+        // JALAN PERTAMA KALI: Muat data saat objek pertama kali dibuat
+        loadRankingData();
+        
+        // JALAN SETIAP DIKLIKS/DIBUKA: Trigger otomatis setiap kali panel ini ditampilkan kembali di layar
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                loadRankingData();
+            }
+        });
+    }
+
+    /**
+     * Method untuk mengambil, mengurutkan, dan menampilkan data ke JTable
+     */
+    public void loadRankingData() {
         // Tarik model tabelnya
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jtRanking.getModel();
+        
+        // Bersihkan seluruh baris lama agar data tidak menumpuk/double saat di-refresh
+        model.setRowCount(0);
 
-        // 1. Ambil data asli dari memori Performia.java
-        Karyawan k1 = Performia.listKaryawan.get(0); // Ini akun lu (Arthes), XP 1500
-        Karyawan k2 = Performia.listKaryawan.get(1); // Ini Faiz, XP 1200
+        // 1. Salin data dari listKaryawan yang ada di memori Performia.java
+        ArrayList<Karyawan> sortedKaryawan = new ArrayList<>(Performia.listKaryawan);
 
-        // 2. Bikin objek Reward-nya (Hardcode sesuai rencana lu)
-        Reward pialaEmas = new Reward("R01", "Bonus Rp 1.000.000");
-        Reward pialaPerak = new Reward("R02", "Bonus Rp 500.000");
+        // 2. Urutkan data berdasarkan TotalXP secara Descending (tertinggi ke terendah)
+        Collections.sort(sortedKaryawan, new Comparator<Karyawan>() {
+            public int compare(Karyawan k1, Karyawan k2) {
+                return Integer.compare(k2.getTotalXP(), k1.getTotalXP());
+            }
+        });
 
-        // 3. Gabungin semuanya ke dalam objek Ranking
-        // Parameter: Periode (Hardcode), Nama (Tarik dari memori), Skor/XP (Tarik dari memori), Reward
-        Ranking rank1 = new Ranking("Juni 2026", k1.getNama(), k1.getTotalXP(), pialaEmas);
-        Ranking rank2 = new Ranking("Juni 2026", k2.getNama(), k2.getTotalXP(), pialaPerak);
-
-        // 4. Masukin ke tabel JTable
-        model.addRow(new Object[]{ "1", rank1.getNamaKaryawan(), rank1.getPeriode(), rank1.getSkorAkhir() + " XP", rank1.getRewardYangDidapat().getNamaReward() });
-        model.addRow(new Object[]{ "2", rank2.getNamaKaryawan(), rank2.getPeriode(), rank2.getSkorAkhir() + " XP", rank2.getRewardYangDidapat().getNamaReward() });
+        // 3. Masukkan data hasil urutan terbaru ke dalam JTable
+        for (int i = 0; i < sortedKaryawan.size(); i++) {
+            Karyawan k = sortedKaryawan.get(i);
+            
+            // Tentukan reward berdasarkan posisi ranking terbaru
+            Reward reward;
+            if (i == 0) {
+                reward = new Reward("R01", "Bonus Rp 1.000.000");
+            } else if (i == 1) {
+                reward = new Reward("R02", "Bonus Rp 500.000");
+            } else if (i == 2){
+                reward = new Reward("R03", "Bonus Rp 300.000");
+            } else {
+                reward = new Reward("R00", "Tidak ada bonus");
+            }
+            
+            // Bungkus ke objek Ranking
+            Ranking rank = new Ranking("Juni 2026", k.getNama(), k.getTotalXP(), reward);
+            
+            // Masukkan baris baru ke JTable
+            model.addRow(new Object[]{ 
+                String.valueOf(i + 1), // Nomor ranking otomatis terupdate sesuai posisi urutan
+                rank.getNamaKaryawan(), 
+                rank.getPeriode(), 
+                rank.getSkorAkhir() + " XP", 
+                rank.getRewardYangDidapat().getNamaReward() 
+            });
+        }
     }
 
     /**
@@ -55,10 +98,7 @@ public class PanelRanking_GUI extends javax.swing.JPanel {
 
         jtRanking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Nomor", "Nama", "Periode", "Skor", "Reward"
