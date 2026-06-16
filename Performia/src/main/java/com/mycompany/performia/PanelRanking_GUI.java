@@ -15,6 +15,26 @@ public class PanelRanking_GUI extends javax.swing.JPanel {
      */
     public PanelRanking_GUI() {
         initComponents();
+        
+        // Tarik model tabelnya
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jtRanking.getModel();
+
+        // 1. Ambil data asli dari memori Performia.java
+        Karyawan k1 = Performia.listKaryawan.get(0); // Ini akun lu (Arthes), XP 1500
+        Karyawan k2 = Performia.listKaryawan.get(1); // Ini Faiz, XP 1200
+
+        // 2. Bikin objek Reward-nya (Hardcode sesuai rencana lu)
+        Reward pialaEmas = new Reward("R01", "Bonus Rp 1.000.000");
+        Reward pialaPerak = new Reward("R02", "Bonus Rp 500.000");
+
+        // 3. Gabungin semuanya ke dalam objek Ranking
+        // Parameter: Periode (Hardcode), Nama (Tarik dari memori), Skor/XP (Tarik dari memori), Reward
+        Ranking rank1 = new Ranking("Juni 2026", k1.getNama(), k1.getTotalXP(), pialaEmas);
+        Ranking rank2 = new Ranking("Juni 2026", k2.getNama(), k2.getTotalXP(), pialaPerak);
+
+        // 4. Masukin ke tabel JTable
+        model.addRow(new Object[]{ "1", rank1.getNamaKaryawan(), rank1.getPeriode(), rank1.getSkorAkhir() + " XP", rank1.getRewardYangDidapat().getNamaReward() });
+        model.addRow(new Object[]{ "2", rank2.getNamaKaryawan(), rank2.getPeriode(), rank2.getSkorAkhir() + " XP", rank2.getRewardYangDidapat().getNamaReward() });
     }
 
     /**
@@ -26,30 +46,77 @@ public class PanelRanking_GUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtRanking = new javax.swing.JTable();
 
-        jLabel1.setText("INI RANKING");
+        jLabel2.setText("Ranking");
+
+        jtRanking.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nomor", "Nama", "Periode", "Skor", "Reward"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jtRanking);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(262, 262, 262)
-                .addComponent(jLabel1)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jLabel1)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtRanking;
     // End of variables declaration//GEN-END:variables
 }
