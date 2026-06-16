@@ -12,6 +12,10 @@ public class Kriteria {
     protected String idKriteria;
     protected String namaKriteria;
     protected float bobot;
+
+    public Kriteria() {
+        this("", "", 0f);
+    }
     
     public Kriteria(String idKriteria, String namaKriteria, float bobot){
         this.idKriteria = idKriteria;
@@ -25,6 +29,14 @@ public class Kriteria {
     
     public String getNamaKriteria(){
         return namaKriteria;
+    }
+
+    public void setIdKriteria(String idKriteria) {
+        this.idKriteria = idKriteria;
+    }
+
+    public void setNamaKriteria(String namaKriteria) {
+        this.namaKriteria = namaKriteria;
     }
     
     public float getBobot(){
