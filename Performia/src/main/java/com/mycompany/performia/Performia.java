@@ -13,6 +13,7 @@ public class Performia {
     public static ArrayList<Karyawan> listKaryawan = new ArrayList<>();
     public static ArrayList<Pengumuman> listPengumuman = new ArrayList<>();
     public static ArrayList<Tugas> listTugas = new ArrayList<>();
+    public static ArrayList<RiwayatPenugasan> listRiwayat = new ArrayList<>();
     public static void initDummyData() {
         
         listKaryawan.clear();
@@ -21,12 +22,14 @@ public class Performia {
         
         Karyawan k1 = new Karyawan("K01", "Arthes", "arthes@mail", "123", "IT", 1100); //XP awal diubah ke 1100
         Karyawan k2 = new Karyawan("K02", "Faiz", "faiz@mail", "123", "IT", 1200);
-        Karyawan k3 = new Karyawan("K03", "Zefa", "zefa@mail", "123", "Cleaning Service", 800);
-        Karyawan k4 = new Karyawan("K04", "McSakinah", "mcsakinah@mail", "123", "IT", 900);
+        Karyawan k3 = new Karyawan("K03", "Zefa", "zefa@mail", "123", "IT", 800);
+        Karyawan k4 = new Karyawan("K04", "Azis", "azis@mail", "123", "IT", 900);
+        Karyawan k5 = new Karyawan("K05", "Haikal", "haikal@mail", "123", "IT", 1050);
         listKaryawan.add(k1);
         listKaryawan.add(k2);
         listKaryawan.add(k3);
         listKaryawan.add(k4);
+        listKaryawan.add(k5);
         System.out.println("Stok dummy Karyawan berhasil dimuat!");
         
         Pengumuman p1 = new Pengumuman("1", "Pengumuman Rapat Divisi", "");
@@ -39,9 +42,9 @@ public class Performia {
         Tugas t1 = new Tugas("1", "Maintenance the website", LocalDate.of(2025, 11, 10), LocalDate.of(2026, 02, 01), "On Going");
         Tugas t2 = new Tugas("2", "Accounting problem report", LocalDate.of(2025, 12, 19), LocalDate.of(2026, 01, 15), "On Going");
         Tugas t3 = new Tugas("3", "Fire the rookie", LocalDate.of(2025, 03, 24), LocalDate.of(2026, 8, 1), "On Going");
-        Tugas t4 = new Tugas("4", "Change Division Head", LocalDate.of(2025, 03, 02), LocalDate.of(2026, 04, 20), "On Going");
-        Tugas t5 = new Tugas("5", "Laporan Evaluasi", LocalDate.of(2025, 03, 02), LocalDate.of(2026, 04, 20), "On Going");
-        Tugas t6 = new Tugas("6", "Laporan Evaluasi 2", LocalDate.of(2025, 03, 02), LocalDate.of(2026, 04, 25), "On Going");
+        Tugas t4 = new Tugas("4", "Change Division Head", LocalDate.of(2025, 03, 02), LocalDate.of(2026, 06, 17), "On Going");
+        Tugas t5 = new Tugas("5", "Laporan Evaluasi", LocalDate.of(2025, 03, 02), LocalDate.of(2026, 06, 17), "On Going");
+        Tugas t6 = new Tugas("6", "Laporan Evaluasi 2", LocalDate.of(2025, 03, 02), LocalDate.of(2026, 06, 22), "On Going");
         listTugas.add(t1);
         listTugas.add(t2);
         listTugas.add(t3);

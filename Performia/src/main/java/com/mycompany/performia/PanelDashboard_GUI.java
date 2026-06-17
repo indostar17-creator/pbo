@@ -282,8 +282,8 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         Performia p = new Performia();
         
-        LocalDate start = LocalDate.parse("2026-04-20");
-        LocalDate end = LocalDate.parse("2026-04-27");
+        LocalDate start = LocalDate.now();
+        LocalDate end = LocalDate.now().plusWeeks(1);
         
         switch(jComboBox1.getSelectedIndex()){
             case 0:
