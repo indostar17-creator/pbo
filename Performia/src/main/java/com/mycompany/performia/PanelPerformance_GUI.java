@@ -75,10 +75,11 @@ public class PanelPerformance_GUI extends javax.swing.JPanel {
 
             for (int i = 0; i < newlyCompletedAssignments; i++) {
 //                totalBonusXP += generateRandomXpBonus();
-                totalBonusXP += pfm.generateXP();
+//                totalBonusXP += pfm.generateXP();
+                totalBonusXP += Performa.getRecentTaskXP();
             }
 
-            Performia.listKaryawan.get(0).tambahXP(totalBonusXP);
+//            Performia.listKaryawan.get(0).tambahXP(totalBonusXP);
         }
 
         previousCompletedAssignments = tugasSelesai;
@@ -88,9 +89,6 @@ public class PanelPerformance_GUI extends javax.swing.JPanel {
         if (!Performia.listKaryawan.isEmpty()) {
             totalXP = Performia.listKaryawan.get(0).getTotalXP();
         }
-        
-        //COntoh ambil nilai static dari kelas lain
-        int taskXP = Performa.getRecentTaskXP();
 
         updateData(
                 tugasSelesai,

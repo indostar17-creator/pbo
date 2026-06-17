@@ -15,17 +15,20 @@ public class PanelRiwayat_GUI extends javax.swing.JPanel {
      */
     public PanelRiwayat_GUI() {
         initComponents();
-        String[] namaKolom = {"Tanggal", "Nama Tugas", "Skor XP"};
-        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(namaKolom, 0);
-
-        model.addRow(new Object[]{"12 Jun 2026", "Maintenance website", 150});
-        model.addRow(new Object[]{"10 Jun 2026", "Fixing bug database", 200});
-        model.addRow(new Object[]{"05 Jun 2026", "Update UI Dashboard", 100});
-
-        TabelRiwayat.setModel(model);
-
+        muatUlangRiwayat();
     }
+public void muatUlangRiwayat() {
+    javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TabelRiwayat.getModel();
+    model.setRowCount(0); // Kosongin dulu biar gak numpuk
 
+    for (RiwayatPenugasan r : Performia.listRiwayat) {
+        model.addRow(new Object[]{
+            r.getTanggal(),
+            r.getNamaTugas(),
+            r.getSkorXP() + " XP"
+        });
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,6 +42,7 @@ public class PanelRiwayat_GUI extends javax.swing.JPanel {
         TabelRiwayat = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         RiwayatPenugasan = new javax.swing.JLabel();
+        Refresh = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -93,25 +97,39 @@ public class PanelRiwayat_GUI extends javax.swing.JPanel {
                 .addGap(18, 18, 18))
         );
 
+        Refresh.setText("Refresh");
+        Refresh.addActionListener(this::RefreshActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Refresh)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
+                .addComponent(Refresh)
+                .addGap(3, 3, 3)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+       muatUlangRiwayat();
+    }//GEN-LAST:event_RefreshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Refresh;
     private javax.swing.JLabel RiwayatPenugasan;
     private javax.swing.JTable TabelRiwayat;
     private javax.swing.JPanel jPanel1;

@@ -177,6 +177,7 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         Performia p = new Performia();
+        Performa pfm = new Performa();
         int baris = tabelTugas.getSelectedRow();
         if (baris == -1) {
             JOptionPane.showMessageDialog(this,"Pilih tugas terlebih dahulu!");
@@ -185,6 +186,17 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
             if (link != null && !link.isEmpty()) {
                 p.setStatusTugas(baris, "Done");
                 tabelTugas.setValueAt(p.getStatusTugas(baris),baris,3);
+                
+                //int randomXP = (int)(Math.random() * 20 + 1) * 5;
+                int randomXP = pfm.generateXP();
+                Performia.listKaryawan.get(0).tambahXP(randomXP);
+
+                // 3. Tangkap datanya dan simpan ke memori pusat
+                String judulTugas = p.getJudulTugas(baris);
+                String tanggalHariIni = java.time.LocalDate.now().toString(); // Realtime coy
+
+                RiwayatPenugasan riwayatBaru = new RiwayatPenugasan(tanggalHariIni, judulTugas, randomXP);
+                Performia.listRiwayat.add(riwayatBaru);
                 JOptionPane.showMessageDialog(this, "Tugas berhasil disubmit!");
                 }
             }
