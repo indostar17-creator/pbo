@@ -5,28 +5,33 @@
 package com.mycompany.performia;
 
 import java.awt.CardLayout;
+import javax.swing.Box;
 
 
 /**
  *
  * @author ARTHES
  */
-public class MainFrame_GUI extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame_GUI.class.getName());
+public class MainFrame_GUI_Karyawan extends javax.swing.JFrame {
+    private int indexKaryawan;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame_GUI_Karyawan.class.getName());
     private final CardLayout cardLayout;
+    private PanelDashboard_GUI_Karyawan dashboard;
 
     /**
      * Creates new form MainFrame_GUI
      */
-    public MainFrame_GUI() {
-        Performia.initDummyData();
+    public MainFrame_GUI_Karyawan(int indexKaryawan) {
+        //Performia.initDummyData();
         initComponents();
+        menuBar.add(Box.createHorizontalGlue());
+        menuBar.add(menuLogout);
+        this.indexKaryawan = indexKaryawan;
         setLocationRelativeTo(null);
         cardLayout = new CardLayout();
         panelMenu.setLayout(cardLayout);
 
-        PanelDashboard_GUI dashboard = new PanelDashboard_GUI();
+        dashboard = new PanelDashboard_GUI_Karyawan(indexKaryawan);
         PanelAssignment_GUI assignment = new PanelAssignment_GUI();
         PanelRiwayat_GUI historyAssignment = new PanelRiwayat_GUI();
         PanelPerformance_GUI performance = new PanelPerformance_GUI();
@@ -56,12 +61,13 @@ public class MainFrame_GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         panelMenu = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         menuDashboard = new javax.swing.JMenu();
         menuAssignment = new javax.swing.JMenu();
         menuHistoryAssignment = new javax.swing.JMenu();
         menuPerformance = new javax.swing.JMenu();
         menuRanking = new javax.swing.JMenu();
+        menuLogout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,7 +99,7 @@ public class MainFrame_GUI extends javax.swing.JFrame {
                 menuDashboardMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuDashboard);
+        menuBar.add(menuDashboard);
 
         menuAssignment.setText("Assignment");
         menuAssignment.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,7 +107,7 @@ public class MainFrame_GUI extends javax.swing.JFrame {
                 menuAssignmentMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuAssignment);
+        menuBar.add(menuAssignment);
 
         menuHistoryAssignment.setText("History Assignment");
         menuHistoryAssignment.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,7 +115,7 @@ public class MainFrame_GUI extends javax.swing.JFrame {
                 menuHistoryAssignmentMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuHistoryAssignment);
+        menuBar.add(menuHistoryAssignment);
 
         menuPerformance.setText("Performance");
         menuPerformance.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,7 +123,7 @@ public class MainFrame_GUI extends javax.swing.JFrame {
                 menuPerformanceMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuPerformance);
+        menuBar.add(menuPerformance);
 
         menuRanking.setText("Ranking");
         menuRanking.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,9 +131,17 @@ public class MainFrame_GUI extends javax.swing.JFrame {
                 menuRankingMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuRanking);
+        menuBar.add(menuRanking);
 
-        setJMenuBar(jMenuBar1);
+        menuLogout.setText("Logout");
+        menuLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuLogoutMouseClicked(evt);
+            }
+        });
+        menuBar.add(menuLogout);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,6 +165,8 @@ public class MainFrame_GUI extends javax.swing.JFrame {
 
     
     private void menuDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDashboardMouseClicked
+        dashboard.refreshDaftarTugas();
+        
         cardLayout.show(panelMenu, "Dashboard");
     }//GEN-LAST:event_menuDashboardMouseClicked
 
@@ -174,6 +190,13 @@ public class MainFrame_GUI extends javax.swing.JFrame {
         cardLayout.show(panelMenu, "Ranking");
     }//GEN-LAST:event_menuRankingMouseClicked
 
+    private void menuLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLogoutMouseClicked
+        Login login = new Login();
+        
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menuLogoutMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -196,14 +219,15 @@ public class MainFrame_GUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame_GUI().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new MainFrame_GUI_Karyawan().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuAssignment;
+    private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuDashboard;
     private javax.swing.JMenu menuHistoryAssignment;
+    private javax.swing.JMenu menuLogout;
     private javax.swing.JMenu menuPerformance;
     private javax.swing.JMenu menuRanking;
     private javax.swing.JPanel panelMenu;

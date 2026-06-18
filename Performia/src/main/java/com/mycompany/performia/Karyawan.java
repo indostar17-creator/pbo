@@ -4,6 +4,8 @@
  */
 package com.mycompany.performia;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ARTHES
@@ -11,6 +13,7 @@ package com.mycompany.performia;
 public class Karyawan extends Pengguna {
     private String idDivisi;
     private int totalXP;
+    private ArrayList<Tugas> listTugas = new ArrayList<>();
   
     public Karyawan(String idUser, String nama, String email, String password, String idDivisi, int totalXP) {
         super(idUser, nama, email, password);
@@ -25,4 +28,5 @@ public class Karyawan extends Pengguna {
     public int getTotalXP() {
         return this.totalXP;
     }
+    
 }

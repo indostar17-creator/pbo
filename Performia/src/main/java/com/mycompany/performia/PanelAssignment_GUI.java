@@ -184,7 +184,9 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
         } else {
             String link = JOptionPane.showInputDialog(this,"Masukkan link bukti tugas:");
             if (link != null && !link.isEmpty()) {
-                p.setStatusTugas(baris, "Done");
+                
+                p.setStatusTugas(baris, "Waiting for Review");
+                p.setTanggalDikumpulkanTugas(baris);
                 tabelTugas.setValueAt(p.getStatusTugas(baris),baris,3);
                 
                 //int randomXP = (int)(Math.random() * 20 + 1) * 5;
@@ -198,8 +200,8 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
                 RiwayatPenugasan riwayatBaru = new RiwayatPenugasan(tanggalHariIni, judulTugas, randomXP);
                 Performia.listRiwayat.add(riwayatBaru);
                 JOptionPane.showMessageDialog(this, "Tugas berhasil disubmit!");
-                }
             }
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

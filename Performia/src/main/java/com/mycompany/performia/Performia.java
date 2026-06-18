@@ -14,17 +14,21 @@ public class Performia {
     public static ArrayList<Pengumuman> listPengumuman = new ArrayList<>();
     public static ArrayList<Tugas> listTugas = new ArrayList<>();
     public static ArrayList<RiwayatPenugasan> listRiwayat = new ArrayList<>();
+    public static ArrayList<Manajer> listManajer = new ArrayList<>();
     public static void initDummyData() {
         
-        listKaryawan.clear();
-        listPengumuman.clear();
-        listTugas.clear();
+        //listKaryawan.clear();
+        //listPengumuman.clear();
+        //listTugas.clear();
         
-        Karyawan k1 = new Karyawan("K01", "Arthes", "arthes@mail", "123", "IT", 1100); //XP awal diubah ke 1100
-        Karyawan k2 = new Karyawan("K02", "Faiz", "faiz@mail", "123", "IT", 1200);
-        Karyawan k3 = new Karyawan("K03", "Zefa", "zefa@mail", "123", "IT", 800);
-        Karyawan k4 = new Karyawan("K04", "Azis", "azis@mail", "123", "IT", 900);
-        Karyawan k5 = new Karyawan("K05", "Haikal", "haikal@mail", "123", "IT", 1050);
+        Manajer m1 = new Manajer("M01", "Anti", "anti@mail", "anti123");
+        listManajer.add(m1);
+        
+        Karyawan k1 = new Karyawan("K01", "Arthes", "arthes@mail", "arthes123", "IT", 1100); //XP awal diubah ke 1100
+        Karyawan k2 = new Karyawan("K02", "Faiz", "faiz@mail", "faiz123", "IT", 1200);
+        Karyawan k3 = new Karyawan("K03", "Zefa", "zefa@mail", "zefa123", "IT", 800);
+        Karyawan k4 = new Karyawan("K04", "Aziz", "aziz@mail", "aziz123", "IT", 900);
+        Karyawan k5 = new Karyawan("K05", "Haikal", "haikal@mail", "haikal123", "IT", 1050);
         listKaryawan.add(k1);
         listKaryawan.add(k2);
         listKaryawan.add(k3);
@@ -57,8 +61,11 @@ public class Performia {
         
     }
     
-    public String getNama(int indexKaryawan){
+    public String getNamaKaryawan(int indexKaryawan){
         return listKaryawan.get(indexKaryawan).getNama();
+    }
+    public String getNamaManajer(int indexManajer){
+        return listManajer.get(indexManajer).getNama();
     }
     public String getJudulPengumuman(int indexJudulPengumuman){
         return listPengumuman.get(indexJudulPengumuman).getJudul();
@@ -81,10 +88,33 @@ public class Performia {
     public String getTanggalDibuatTugas(int index){
         return listTugas.get(index).getTanggalDibuat().toString();
     }
+    public void setTanggalDikumpulkanTugas(int index){
+        listTugas.get(index).setTanggalDikumpulkan();
+    }
+    public LocalDate getTanggalDikumpulkanTugas(int index){
+        return listTugas.get(index).getTanggalDikumpulkan();
+    }
+    
     public void setStatusTugas(int index, String statusTugasBaru){
         listTugas.get(index).setStatus(statusTugasBaru);
     }
     public String getStatusTugas(int index){
         return listTugas.get(index).getStatus();
     }
+    public String getEmailManajer(int index){
+        return listManajer.get(index).getEmail();
+    }
+    public String getPasswordManajer (int index){
+        return listManajer.get(index).getPassword();
+    }
+    public String getEmailKaryawan (int index){
+        return listKaryawan.get(index).getEmail();
+    }
+    public String getPasswordKaryawan (int index){
+        return listKaryawan.get(index).getPassword();
+    }
+    public int getTotalEmail(){
+        return listKaryawan.size()+listManajer.size();
+    }
+    
 }

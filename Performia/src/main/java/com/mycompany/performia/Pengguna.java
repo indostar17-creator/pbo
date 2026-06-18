@@ -24,4 +24,12 @@ public class Pengguna {
     public String getNama() {
         return this.nama;
     }
+    
+    public String getEmail(){
+        return email;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
 }

@@ -16,6 +16,7 @@ public class Tugas {
     private String judul;
     private LocalDate tanggalDibuat;
     private LocalDate tanggalBatas;
+    private LocalDate tanggalDikumpulkan;
     private String status;
 
     public Tugas() {
@@ -59,5 +60,11 @@ public class Tugas {
     public void setStatus(String status) {
         this.status = status;
     }
-
+    
+    public LocalDate getTanggalDikumpulkan(){
+        return tanggalDikumpulkan;
+    }
+     public void setTanggalDikumpulkan(){
+         this.tanggalDikumpulkan = LocalDate.now();
+     }
 }

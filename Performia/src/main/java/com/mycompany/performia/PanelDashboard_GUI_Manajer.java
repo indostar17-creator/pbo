@@ -4,25 +4,26 @@
  */
 package com.mycompany.performia;
 
-import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ARTHES
+ * @author faizd
  */
-public class PanelDashboard_GUI extends javax.swing.JPanel {
+public class PanelDashboard_GUI_Manajer extends javax.swing.JPanel {
     private DefaultTableModel model;
+    private int usernameAktif;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelDashboard_GUI.class.getName());
-
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelDashboard_GUI_Karyawan.class.getName());
     /**
-     * Creates new form PanelDashboard_GUI
+     * Creates new form PanelDashboard_GUI_Manajer
      */
-    public PanelDashboard_GUI() {
+    public PanelDashboard_GUI_Manajer(int usernameAktif) {
         initComponents();
+        this.usernameAktif = usernameAktif;
         Performia p = new Performia();
-        labelNama.setText("Selamat Datang, "+ p.getNama(0));
+        
+        labelNama.setText("Selamat Datang, "+ p.getNamaManajer(usernameAktif));
         labelJudulPengumuman.setText(p.getJudulPengumuman(0));
         p.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
         labelIsiPengumuman1.setText(p.getIsiPengumuman(0));
@@ -33,10 +34,16 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         p.setIsiPengumuman(0, "Peserta: Seluruh manajer divisi dan tim proyek (harap hadir tepat waktu)");
         labelIsiPengumuman4.setText(p.getIsiPengumuman(0));
         
-        model = (DefaultTableModel) tabelTugas.getModel();
-        
-        for (int i = 0; i < p.getJumlahTugas(); i++) {
-            model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
+        refreshDaftarReviewTugas();
+    }
+    public void refreshDaftarReviewTugas(){
+        Performia p = new Performia();
+        model = (DefaultTableModel) tabelDaftarTugas.getModel();
+        model.setRowCount(0);
+        for(int i = 0; i < p.getJumlahTugas();i++){
+            if(p.getStatusTugas(i).equalsIgnoreCase("Waiting for Review")){
+                model.addRow(new Object[]{p.getJudulTugas(i), p.getTanggalDikumpulkanTugas(i), p.getStatusTugas(i)});
+            }
         }
     }
 
@@ -49,8 +56,6 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelNama = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         labelJudulPengumuman = new javax.swing.JLabel();
         labelIsiPengumuman1 = new javax.swing.JLabel();
@@ -58,24 +63,14 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         cbPengumuman = new javax.swing.JComboBox<>();
         labelIsiPengumuman3 = new javax.swing.JLabel();
         labelIsiPengumuman4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabelTugas = new javax.swing.JTable();
+        labelNama = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelDaftarTugas = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 204));
-        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        labelNama.setBackground(new java.awt.Color(255, 255, 255));
-        labelNama.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        labelNama.setForeground(new java.awt.Color(51, 51, 51));
-        labelNama.setText("SELAMAT DATANG, (NAMA) ");
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Pengumuman");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -122,7 +117,7 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(labelJudulPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                         .addComponent(cbPengumuman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -151,37 +146,41 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jComboBox1.setForeground(new java.awt.Color(51, 51, 51));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Hari Ini", "Minggu Ini" }));
-        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
-
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Daftar Tugas");
+        jLabel2.setText("Pengumuman");
 
-        tabelTugas.setBackground(new java.awt.Color(204, 204, 204));
-        tabelTugas.setForeground(new java.awt.Color(51, 51, 51));
-        tabelTugas.setModel(new javax.swing.table.DefaultTableModel(
+        labelNama.setBackground(new java.awt.Color(255, 255, 255));
+        labelNama.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        labelNama.setForeground(new java.awt.Color(51, 51, 51));
+        labelNama.setText("SELAMAT DATANG, (NAMA) ");
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setText("Daftar Review Tugas");
+
+        tabelDaftarTugas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tugas", "Tenggat Waktu"
+                "Tugas", "Tanggal Dikumpulkan", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tabelTugas);
+        jScrollPane1.setViewportView(tabelDaftarTugas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -189,24 +188,25 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addComponent(jLabel3)
+                .addContainerGap(451, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel3)
+                .addContainerGap(195, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(36, 36, 36)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(98, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -214,15 +214,15 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelNama, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelNama, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -230,105 +230,70 @@ public class PanelDashboard_GUI extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelNama, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(11, 11, 11))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbPengumumanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPengumumanActionPerformed
         Performia k = new Performia();
-        
+
         switch(cbPengumuman.getSelectedIndex()){
             case 0:
-                labelJudulPengumuman.setText(k.getJudulPengumuman(0));
-                k.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
-                labelIsiPengumuman1.setText(k.getIsiPengumuman(0));
-                k.setIsiPengumuman(0, "Agenda: Evaluasi kinerja kuartal II dan rencana proyek baru");
-                labelIsiPengumuman2.setText(k.getIsiPengumuman(0));
-                k.setIsiPengumuman(0, "Tempat: Ruang Meeting Lantai 2");
-                labelIsiPengumuman3.setText(k.getIsiPengumuman(0));
-                k.setIsiPengumuman(0, "Peserta: Seluruh manajer divisi dan tim proyek (harap hadir tepat waktu)");
-                labelIsiPengumuman4.setText(k.getIsiPengumuman(0));
-                break;
+            labelJudulPengumuman.setText(k.getJudulPengumuman(0));
+            k.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
+            labelIsiPengumuman1.setText(k.getIsiPengumuman(0));
+            k.setIsiPengumuman(0, "Agenda: Evaluasi kinerja kuartal II dan rencana proyek baru");
+            labelIsiPengumuman2.setText(k.getIsiPengumuman(0));
+            k.setIsiPengumuman(0, "Tempat: Ruang Meeting Lantai 2");
+            labelIsiPengumuman3.setText(k.getIsiPengumuman(0));
+            k.setIsiPengumuman(0, "Peserta: Seluruh manajer divisi dan tim proyek (harap hadir tepat waktu)");
+            labelIsiPengumuman4.setText(k.getIsiPengumuman(0));
+            break;
             case 1:
-                labelJudulPengumuman.setText(k.getJudulPengumuman(1));
-                k.setIsiPengumuman(1, "Perusahaan akan mengadakan pelatihan untuk meningkatkan kemampuan komunikasi efektif dalam tim.");
-                labelIsiPengumuman1.setText(k.getIsiPengumuman(1));
-                k.setIsiPengumuman(1, "Waktu: Jumat, 19 Juni 2026 pukul 09.00–12.00 WIB di Ruang Training.");
-                labelIsiPengumuman2.setText(k.getIsiPengumuman(1));
-                k.setIsiPengumuman(1, "Peserta: Seluruh karyawan divisi pemasaran.");
-                labelIsiPengumuman3.setText(k.getIsiPengumuman(1));
-                k.setIsiPengumuman(1, "Mohon membawa laptop pribadi untuk simulasi praktik.");
-                labelIsiPengumuman4.setText(k.getIsiPengumuman(1));
-                break;
+            labelJudulPengumuman.setText(k.getJudulPengumuman(1));
+            k.setIsiPengumuman(1, "Perusahaan akan mengadakan pelatihan untuk meningkatkan kemampuan komunikasi efektif dalam tim.");
+            labelIsiPengumuman1.setText(k.getIsiPengumuman(1));
+            k.setIsiPengumuman(1, "Waktu: Jumat, 19 Juni 2026 pukul 09.00–12.00 WIB di Ruang Training.");
+            labelIsiPengumuman2.setText(k.getIsiPengumuman(1));
+            k.setIsiPengumuman(1, "Peserta: Seluruh karyawan divisi pemasaran.");
+            labelIsiPengumuman3.setText(k.getIsiPengumuman(1));
+            k.setIsiPengumuman(1, "Mohon membawa laptop pribadi untuk simulasi praktik.");
+            labelIsiPengumuman4.setText(k.getIsiPengumuman(1));
+            break;
             case 2:
-                labelJudulPengumuman.setText(k.getJudulPengumuman(2));
-                k.setIsiPengumuman(2, "Kami akan melakukan perbaikan sistem untuk meningkatkan performa aplikasi.");
-                labelIsiPengumuman1.setText(k.getIsiPengumuman(2));
-                k.setIsiPengumuman(2, "Waktu perbaikan: Minggu, 20 Juni 2026 pukul 22.00 – 02.00 WIB.");
-                labelIsiPengumuman2.setText(k.getIsiPengumuman(2));
-                k.setIsiPengumuman(2, "Selama periode tersebut, aplikasi tidak dapat diakses.");
-                labelIsiPengumuman3.setText(k.getIsiPengumuman(2));
-                k.setIsiPengumuman(2, "Mohon selesaikan tugas atau aktivitas penting sebelum waktu perbaikan dimulai.");
-                labelIsiPengumuman4.setText(k.getIsiPengumuman(2));
-                break;
+            labelJudulPengumuman.setText(k.getJudulPengumuman(2));
+            k.setIsiPengumuman(2, "Kami akan melakukan perbaikan sistem untuk meningkatkan performa aplikasi.");
+            labelIsiPengumuman1.setText(k.getIsiPengumuman(2));
+            k.setIsiPengumuman(2, "Waktu perbaikan: Minggu, 20 Juni 2026 pukul 22.00 – 02.00 WIB.");
+            labelIsiPengumuman2.setText(k.getIsiPengumuman(2));
+            k.setIsiPengumuman(2, "Selama periode tersebut, aplikasi tidak dapat diakses.");
+            labelIsiPengumuman3.setText(k.getIsiPengumuman(2));
+            k.setIsiPengumuman(2, "Mohon selesaikan tugas atau aktivitas penting sebelum waktu perbaikan dimulai.");
+            labelIsiPengumuman4.setText(k.getIsiPengumuman(2));
+            break;
         }
     }//GEN-LAST:event_cbPengumumanActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        Performia p = new Performia();
-        
-        LocalDate start = LocalDate.now();
-        LocalDate end = LocalDate.now().plusWeeks(1);
-        
-        switch(jComboBox1.getSelectedIndex()){
-            case 0:
-                model.setRowCount(0);
-                for (int i = 0; i < p.getJumlahTugas(); i++) {
-                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done")){
-                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
-                    }
-                }
-                break;
-            case 1:
-                model.setRowCount(0);
-                for (int i = 0; i < p.getJumlahTugas(); i++){
-                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done") && p.getTenggatWaktu(i).equalsIgnoreCase(start.toString())){
-                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
-                    }
-                }
-                break;
-            case 2:
-                model.setRowCount(0);
-                for(int i = 0; i < p.getJumlahTugas(); i++){
-                    LocalDate deadline = LocalDate.parse(p.getTenggatWaktu(i));
-                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done") && !deadline.isBefore(start) && !deadline.isAfter(end)){
-                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
-                    }
-                }
-                break;
-        }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbPengumuman;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelIsiPengumuman1;
     private javax.swing.JLabel labelIsiPengumuman2;
     private javax.swing.JLabel labelIsiPengumuman3;
     private javax.swing.JLabel labelIsiPengumuman4;
     private javax.swing.JLabel labelJudulPengumuman;
     private javax.swing.JLabel labelNama;
-    private javax.swing.JTable tabelTugas;
+    private javax.swing.JTable tabelDaftarTugas;
     // End of variables declaration//GEN-END:variables
 }
