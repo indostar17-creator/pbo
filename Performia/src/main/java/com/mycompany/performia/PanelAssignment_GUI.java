@@ -14,29 +14,31 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
     /**
      * Creates new form PanelAssignment_GUI
      */
-    public PanelAssignment_GUI() {
-    initComponents();
+    private int akunAktif;
+    
+    public PanelAssignment_GUI(int akunAktif) {
+        initComponents();
+        this.akunAktif = akunAktif;
+        //Performia p = new Performia();
+        Karyawan k = Performia.listKaryawan.get(akunAktif);
+        DefaultTableModel model =
+                (DefaultTableModel) tabelTugas.getModel();
 
-    Performia p = new Performia();
+        model.setRowCount(0);
 
-    DefaultTableModel model =
-            (DefaultTableModel) tabelTugas.getModel();
+        for(int i = 0; i < k.getTotalTugas(); i++){
 
-    model.setRowCount(0);
+            model.addRow(new Object[]{
 
-    for(int i = 0; i < p.getJumlahTugas(); i++){
+                k.getListTugas(i).getJudul(),
+                k.getListTugas(i).getTanggalDibuat(),
+                k.getListTugas(i).getTanggalBatas(),
+                k.getListTugas(i).getStatus()
 
-        model.addRow(new Object[]{
+            });
 
-            p.getJudulTugas(i),
-            p.getTanggalDibuatTugas(i),
-            p.getTenggatWaktu(i),
-            p.getStatusTugas(i)
-
-        });
-
+        }
     }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,8 +178,8 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        Performia p = new Performia();
-        Performa pfm = new Performa();
+        //Performia p = new Performia();
+        //Performa pfm = new Performa();
         int baris = tabelTugas.getSelectedRow();
         if (baris == -1) {
             JOptionPane.showMessageDialog(this,"Pilih tugas terlebih dahulu!");
@@ -185,20 +187,28 @@ public class PanelAssignment_GUI extends javax.swing.JPanel {
             String link = JOptionPane.showInputDialog(this,"Masukkan link bukti tugas:");
             if (link != null && !link.isEmpty()) {
                 
-                p.setStatusTugas(baris, "Waiting for Review");
-                p.setTanggalDikumpulkanTugas(baris);
-                tabelTugas.setValueAt(p.getStatusTugas(baris),baris,3);
+//                p.setStatusTugas(baris, "Waiting for Review");
+//                p.setTanggalDikumpulkanTugas(baris);
+//                tabelTugas.setValueAt(p.getStatusTugas(baris),baris,3);
                 
+                Karyawan k = Performia.listKaryawan.get(akunAktif);
+                Tugas t = k.getListTugas(baris);
+                t.setStatus("Waiting for Review");
+                t.setTanggalDikumpulkan();
+                tabelTugas.setValueAt(t.getStatus(), baris, 3);
+
                 //int randomXP = (int)(Math.random() * 20 + 1) * 5;
-                int randomXP = pfm.generateXP();
-                Performia.listKaryawan.get(0).tambahXP(randomXP);
+//                int randomXP = pfm.generateXP();
+                //int XP = Performia.listKaryawan.get(akunAktif).getListTugas(akunAktif).getSkorXP();
+                //Performia.listKaryawan.get(akunAktif).tambahXP(XP);
+                
 
                 // 3. Tangkap datanya dan simpan ke memori pusat
-                String judulTugas = p.getJudulTugas(baris);
-                String tanggalHariIni = java.time.LocalDate.now().toString(); // Realtime coy
+                //String judulTugas = t.getJudul();
+                //String tanggalHariIni = java.time.LocalDate.now().toString(); // Realtime coy
 
-                RiwayatPenugasan riwayatBaru = new RiwayatPenugasan(tanggalHariIni, judulTugas, randomXP);
-                Performia.listRiwayat.add(riwayatBaru);
+                //RiwayatPenugasan riwayatBaru = new RiwayatPenugasan(tanggalHariIni, judulTugas, XP);
+                //Performia.listRiwayat.add(riwayatBaru);
                 JOptionPane.showMessageDialog(this, "Tugas berhasil disubmit!");
             }
         }

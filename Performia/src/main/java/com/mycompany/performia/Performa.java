@@ -48,16 +48,16 @@ public class Performa {
         this.totalXP = totalXP;
     }
     
-    public int generateXP(){ //untuk generate penambahan XP
-        int random = rand.nextInt(1, 21) * 5;
-        randomGenTemp = random;
-        return random;
-    }
+//    public int generateXP(){ //untuk generate penambahan XP
+//        int random = rand.nextInt(1, 21) * 5;
+//        randomGenTemp = random;
+//        return random;
+//    }
     
     //utk Riwayat Penambahan XP pake ini
-    public static int getRecentTaskXP(){ //untuk ambil nilai penambahan XP terbaru (untuk ambil data XP task terbaru)
-        return randomGenTemp;
-    }
+//    public static int getRecentTaskXP(){ //untuk ambil nilai penambahan XP terbaru (untuk ambil data XP task terbaru)
+//        return randomGenTemp;
+//    }
         
     public String getIdPerforma(){
         return idPerforma;

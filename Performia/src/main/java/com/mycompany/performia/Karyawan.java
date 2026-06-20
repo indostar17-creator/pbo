@@ -4,6 +4,7 @@
  */
 package com.mycompany.performia;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +15,7 @@ public class Karyawan extends Pengguna {
     private String idDivisi;
     private int totalXP;
     private ArrayList<Tugas> listTugas = new ArrayList<>();
+    private ArrayList<RiwayatPenugasan> listRiwayat = new ArrayList<>();
   
     public Karyawan(String idUser, String nama, String email, String password, String idDivisi, int totalXP) {
         super(idUser, nama, email, password);
@@ -29,4 +31,28 @@ public class Karyawan extends Pengguna {
         return this.totalXP;
     }
     
+    public Tugas getListTugas(int index){
+        return listTugas.get(index);
+    }
+    
+    public void setTugas(String idTugas, String judulTugas, LocalDate tanggalBatas, int skorXP){
+        Tugas tugas = new Tugas(idTugas, judulTugas, LocalDate.now(), tanggalBatas, "On-Going", skorXP);
+        this.listTugas.add(tugas);
+    }
+    
+    public int getTotalTugas(){
+        return listTugas.size();
+    }
+    
+    public RiwayatPenugasan getListRiwayatPenugasan(int index){
+        return listRiwayat.get(index);
+    }
+    
+    public void setRiwayat(RiwayatPenugasan riwayatBaru){
+        listRiwayat.add(riwayatBaru);
+    }
+    
+    public int getTotalRiwayat(){
+        return listRiwayat.size();
+    }
 }

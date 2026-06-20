@@ -33,7 +33,7 @@ public class MainFrame_GUI_Manajer extends javax.swing.JFrame {
 
         dashboard = new PanelDashboard_GUI_Manajer(indexManajer);
         PanelCreateAssignment_GUI createAssignment = new PanelCreateAssignment_GUI();
-        reviewAssignment = new PanelReviewAssignment_GUI();
+        reviewAssignment = new PanelReviewAssignment_GUI(indexManajer);
         PanelRanking_GUI ranking = new PanelRanking_GUI();
 
         panelMenu.add(dashboard, "Dashboard");

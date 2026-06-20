@@ -10,15 +10,17 @@ import java.time.LocalDate;
  *
  * @author ARTHES
  */
+
 public class PanelPerformance_GUI extends javax.swing.JPanel {
     Performa pfm = new Performa();
     private int previousCompletedAssignments = -1;
-
+    private int akunAktif;
     /**
      * Creates new form PanelPerformance_GUI
      */
-    public PanelPerformance_GUI() {
+    public PanelPerformance_GUI(int akunAktif) {
         initComponents();
+        this.akunAktif = akunAktif;
         reloadPerformanceData();
     }
 
@@ -46,15 +48,17 @@ public class PanelPerformance_GUI extends javax.swing.JPanel {
 
     private void reloadPerformanceData() {
         Performia p = new Performia();
-        int totalTugas = p.getJumlahTugas();
+        Karyawan k = Performia.listKaryawan.get(akunAktif);
+        int totalTugas = k.getTotalTugas();
         int tugasSelesai = 0;
         int tugasOnTime = 0;
         int tugasOverdue = 0;
         LocalDate hariIni = LocalDate.now();
 
         for (int i = 0; i < totalTugas; i++) {
-            boolean selesai = p.getStatusTugas(i).equalsIgnoreCase("Done");
-            boolean overdue = LocalDate.parse(p.getTenggatWaktu(i)).isBefore(hariIni);
+            Tugas t = k.getListTugas(i);
+            boolean selesai = t.getStatus().equalsIgnoreCase("Done");
+            boolean overdue = t.getTanggalBatas().isBefore(hariIni);
 
             if (selesai) {
                 tugasSelesai++;
@@ -76,7 +80,11 @@ public class PanelPerformance_GUI extends javax.swing.JPanel {
             for (int i = 0; i < newlyCompletedAssignments; i++) {
 //                totalBonusXP += generateRandomXpBonus();
 //                totalBonusXP += pfm.generateXP();
-                totalBonusXP += Performa.getRecentTaskXP();
+                Tugas t = k.getListTugas(i);
+                int XP = t.getSkorXP();
+                
+//                totalBonusXP += Performa.getRecentTaskXP();
+                totalBonusXP += XP;
             }
 
 //            Performia.listKaryawan.get(0).tambahXP(totalBonusXP);
@@ -87,7 +95,7 @@ public class PanelPerformance_GUI extends javax.swing.JPanel {
         int totalXP = 0;
 
         if (!Performia.listKaryawan.isEmpty()) {
-            totalXP = Performia.listKaryawan.get(0).getTotalXP();
+            totalXP = k.getTotalXP();
         }
 
         updateData(

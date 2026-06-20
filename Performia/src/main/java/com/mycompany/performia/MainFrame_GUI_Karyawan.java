@@ -32,9 +32,9 @@ public class MainFrame_GUI_Karyawan extends javax.swing.JFrame {
         panelMenu.setLayout(cardLayout);
 
         dashboard = new PanelDashboard_GUI_Karyawan(indexKaryawan);
-        PanelAssignment_GUI assignment = new PanelAssignment_GUI();
-        PanelRiwayat_GUI historyAssignment = new PanelRiwayat_GUI();
-        PanelPerformance_GUI performance = new PanelPerformance_GUI();
+        PanelAssignment_GUI assignment = new PanelAssignment_GUI(indexKaryawan);
+        PanelRiwayat_GUI historyAssignment = new PanelRiwayat_GUI(indexKaryawan);
+        PanelPerformance_GUI performance = new PanelPerformance_GUI(indexKaryawan);
         PanelRanking_GUI ranking = new PanelRanking_GUI();
 
         panelMenu.add(dashboard, "Dashboard");

@@ -13,19 +13,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PanelDashboard_GUI_Karyawan extends javax.swing.JPanel {
     private DefaultTableModel model;
-    private int usernameAktif;
+    private int akunAktif;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelDashboard_GUI_Karyawan.class.getName());
 
     /**
      * Creates new form PanelDashboard_GUI
      */
-    public PanelDashboard_GUI_Karyawan(int usernameAktif) {
+    public PanelDashboard_GUI_Karyawan(int akunAktif) {
         initComponents();
-        this.usernameAktif = usernameAktif;
+        this.akunAktif = akunAktif;
         Performia p = new Performia();
+        Karyawan k = Performia.listKaryawan.get(akunAktif);
         
-        labelNama.setText("Selamat Datang, "+ p.getNamaKaryawan(usernameAktif));
+        labelNama.setText("Selamat Datang, "+ k.getNama());
         labelJudulPengumuman.setText(p.getJudulPengumuman(0));
         p.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
         labelIsiPengumuman1.setText(p.getIsiPengumuman(0));
@@ -41,12 +42,13 @@ public class PanelDashboard_GUI_Karyawan extends javax.swing.JPanel {
     }
     
     public void refreshDaftarTugas(){
-        Performia p = new Performia();
+        Karyawan k = Performia.listKaryawan.get(akunAktif);
         model = (DefaultTableModel) tabelTugas.getModel();
         model.setRowCount(0);
-        for(int i = 0; i < p.getJumlahTugas();i++){
-            if(!p.getStatusTugas(i).equalsIgnoreCase("Done")){
-                model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
+        for(int i = 0; i < k.getTotalTugas();i++){
+            Tugas t = k.getListTugas(i);
+            if(!k.getListTugas(i).getStatus().equalsIgnoreCase("Done")){
+                model.addRow(new Object[]{t.getJudul(), t.getTanggalBatas()});
                 
             }
         }
@@ -291,7 +293,8 @@ public class PanelDashboard_GUI_Karyawan extends javax.swing.JPanel {
     }//GEN-LAST:event_cbPengumumanActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        Performia p = new Performia();
+        //Performia p = new Performia();
+        Karyawan k = Performia.listKaryawan.get(akunAktif);
         
         LocalDate start = LocalDate.now();
         LocalDate end = LocalDate.now().plusWeeks(1);
@@ -299,32 +302,36 @@ public class PanelDashboard_GUI_Karyawan extends javax.swing.JPanel {
         switch(jComboBox1.getSelectedIndex()){
             case 0:
                 model.setRowCount(0);
-                for (int i = 0; i < p.getJumlahTugas(); i++) {
-                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done")){
-                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
+                for (int i = 0; i < k.getTotalTugas(); i++) {
+                    Tugas t = k.getListTugas(i);
+                    if(!t.getStatus().equalsIgnoreCase("Done")){
+                        model.addRow(new Object[]{t.getJudul(), t.getTanggalBatas()});
                     }
                 }
                 break;
             case 1:
                 model.setRowCount(0);
-                for (int i = 0; i < p.getJumlahTugas(); i++){
-                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done") && p.getTenggatWaktu(i).equalsIgnoreCase(start.toString())){
-                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
+                for (int i = 0; i < k.getTotalTugas(); i++){
+                    Tugas t = k.getListTugas(i);
+                    if(!t.getStatus().equalsIgnoreCase("Done") && t.getTanggalBatas().toString().equalsIgnoreCase(start.toString())){
+                        model.addRow(new Object[]{t.getJudul(), t.getTanggalBatas()});
                     }
                 }
                 break;
             case 2:
                 model.setRowCount(0);
-                for(int i = 0; i < p.getJumlahTugas(); i++){
-                    LocalDate deadline = LocalDate.parse(p.getTenggatWaktu(i));
-                    if(!p.getStatusTugas(i).equalsIgnoreCase("Done") && !deadline.isBefore(start) && !deadline.isAfter(end)){
-                        model.addRow(new Object[]{p.getJudulTugas(i), p.getTenggatWaktu(i)});
+                for(int i = 0; i < k.getTotalTugas(); i++){
+                    Tugas t = k.getListTugas(i);
+                    LocalDate deadline = t.getTanggalBatas();
+                    if(!t.getStatus().equalsIgnoreCase("Done") && !deadline.isBefore(start) && !deadline.isAfter(end)){
+                        model.addRow(new Object[]{t.getJudul(), t.getTanggalBatas()});
                     }
                 }
                 break;
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbPengumuman;

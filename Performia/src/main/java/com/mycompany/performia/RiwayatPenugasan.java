@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class RiwayatPenugasan {
     private String tanggal;
-private String namaTugas;
-private int skorXP;
+    private String namaTugas;
+    private int skorXP;
 
 public RiwayatPenugasan(String tanggal, String namaTugas, int skorXP) {
     this.tanggal = tanggal;

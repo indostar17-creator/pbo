@@ -18,21 +18,33 @@ public class PanelReviewAssignment_GUI extends javax.swing.JPanel {
      * Creates new form PanelReviewAssignment_GUI
      */
     private ArrayList<Integer> listIndexTugas = new ArrayList<>();
-    public PanelReviewAssignment_GUI() {
+    private ArrayList<Integer> listIndexKaryawan = new ArrayList<>();
+    private int akunAktif;
+    public PanelReviewAssignment_GUI(int akunAktif) {
         initComponents();
+        this.akunAktif = akunAktif;
         refreshTugas();
     }
     
     public void refreshTugas(){
-        Performia p = new Performia();
         model = (DefaultTableModel) tabelDaftarTugas.getModel();
         model.setRowCount(0);
         listIndexTugas.clear();
-        for(int i = 0; i < p.getJumlahTugas();i++){
-            if(p.getStatusTugas(i).equalsIgnoreCase("Waiting for Review")){
-                model.addRow(new Object[]{p.getJudulTugas(i), p.getTanggalDikumpulkanTugas(i), p.getStatusTugas(i)});
-                listIndexTugas.add(i);
+        listIndexKaryawan.clear();
+        for(int i = 0; i < Performia.listKaryawan.size();i++){
+            Karyawan k = Performia.listKaryawan.get(i);
+            
+            for(int j = 0; j < k.getTotalTugas(); j++){
+                Tugas t = k.getListTugas(j);
+                if(t.getStatus().equalsIgnoreCase("Waiting for Review")){
+                    model.addRow(new Object[]{k.getNama(), t.getJudul(), t.getTanggalDikumpulkan(), t.getStatus()});
+                    listIndexKaryawan.add(i);
+                    listIndexTugas.add(j);
+                }
+                
             }
+            
+            
         }
     }
 
@@ -55,11 +67,11 @@ public class PanelReviewAssignment_GUI extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tugas", "Tanggal Dikumpulkan", "Status"
+                "Nama Karyawan", "Tugas", "Tanggal Dikumpulkan", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -104,21 +116,35 @@ public class PanelReviewAssignment_GUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bReviewActionPerformed
-        Performia p = new Performia();
         int pilihTugas = tabelDaftarTugas.getSelectedRow();
+        
         if (pilihTugas == -1) {
             JOptionPane.showMessageDialog(this,"Pilih tugas terlebih dahulu!");
         } else {
             String feedback = JOptionPane.showInputDialog(this,"Berikan feedback:");
             if (feedback != null && !feedback.isEmpty()) {
                 int indexTugas = listIndexTugas.get(pilihTugas);
-                p.setStatusTugas(indexTugas, "Done");
+                int indexKaryawan = listIndexKaryawan.get(pilihTugas);
+                Karyawan k = Performia.listKaryawan.get(indexKaryawan);
+                Tugas t = k.getListTugas(indexTugas);
+                t.setStatus("Done");
                 refreshTugas();
                 JOptionPane.showMessageDialog(this, "Tugas berhasil direview!");
+                k.tambahXP(t.getSkorXP());
+                
+                String judulTugas = t.getJudul();
+                String tanggalHariIni = java.time.LocalDate.now().toString();
+
+                RiwayatPenugasan riwayatBaru = new RiwayatPenugasan(tanggalHariIni, judulTugas, t.getSkorXP());
+                //Performia.listRiwayat.add(riwayatBaru);
+                k.setRiwayat(riwayatBaru);
+                
             }
         }
+        
     }//GEN-LAST:event_bReviewActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bReview;

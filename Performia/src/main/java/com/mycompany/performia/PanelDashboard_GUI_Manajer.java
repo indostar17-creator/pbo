@@ -12,18 +12,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PanelDashboard_GUI_Manajer extends javax.swing.JPanel {
     private DefaultTableModel model;
-    private int usernameAktif;
+    private int akunAktif;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PanelDashboard_GUI_Karyawan.class.getName());
     /**
      * Creates new form PanelDashboard_GUI_Manajer
      */
-    public PanelDashboard_GUI_Manajer(int usernameAktif) {
+    public PanelDashboard_GUI_Manajer(int akunAktif) {
         initComponents();
-        this.usernameAktif = usernameAktif;
+        this.akunAktif = akunAktif;
         Performia p = new Performia();
+        Manajer m = Performia.listManajer.get(akunAktif);
         
-        labelNama.setText("Selamat Datang, "+ p.getNamaManajer(usernameAktif));
+        labelNama.setText("Selamat Datang, "+ m.getNama());
         labelJudulPengumuman.setText(p.getJudulPengumuman(0));
         p.setIsiPengumuman(0, "Hari Senin, 22 Juni 2026 pukul 10.00 WIB");
         labelIsiPengumuman1.setText(p.getIsiPengumuman(0));
@@ -37,12 +38,15 @@ public class PanelDashboard_GUI_Manajer extends javax.swing.JPanel {
         refreshDaftarReviewTugas();
     }
     public void refreshDaftarReviewTugas(){
-        Performia p = new Performia();
         model = (DefaultTableModel) tabelDaftarTugas.getModel();
         model.setRowCount(0);
-        for(int i = 0; i < p.getJumlahTugas();i++){
-            if(p.getStatusTugas(i).equalsIgnoreCase("Waiting for Review")){
-                model.addRow(new Object[]{p.getJudulTugas(i), p.getTanggalDikumpulkanTugas(i), p.getStatusTugas(i)});
+        for(int i = 0; i < Performia.listKaryawan.size();i++){
+            Karyawan k = Performia.listKaryawan.get(i);
+            for(int j = 0; j < k.getTotalTugas(); j++){
+                Tugas t = k.getListTugas(j);
+                if(t.getStatus().equalsIgnoreCase("Waiting for Review")){
+                    model.addRow(new Object[]{k.getNama(), t.getJudul(), t.getTanggalDikumpulkan(), t.getStatus()});
+                }
             }
         }
     }
@@ -169,11 +173,11 @@ public class PanelDashboard_GUI_Manajer extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tugas", "Tanggal Dikumpulkan", "Status"
+                "Nama karyawan", "Tugas", "Tanggal Dikumpulkan", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

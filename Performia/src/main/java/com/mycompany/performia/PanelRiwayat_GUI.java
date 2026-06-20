@@ -13,21 +13,30 @@ public class PanelRiwayat_GUI extends javax.swing.JPanel {
     /**
      * Creates new form PanelRiwayat_GUI
      */
-    public PanelRiwayat_GUI() {
+    private int akunAktif;
+    public PanelRiwayat_GUI(int akunAktif) {
         initComponents();
+        this.akunAktif = akunAktif;
         muatUlangRiwayat();
     }
 public void muatUlangRiwayat() {
     javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TabelRiwayat.getModel();
     model.setRowCount(0); // Kosongin dulu biar gak numpuk
-
-    for (RiwayatPenugasan r : Performia.listRiwayat) {
-        model.addRow(new Object[]{
-            r.getTanggal(),
-            r.getNamaTugas(),
-            r.getSkorXP() + " XP"
-        });
+    
+    Karyawan k = Performia.listKaryawan.get(akunAktif);
+    for(int i = 0; i < k.getTotalRiwayat(); i++){
+        RiwayatPenugasan rp = k.getListRiwayatPenugasan(i);
+        model.addRow(new Object[] {rp.getTanggal(), rp.getNamaTugas(), rp.getSkorXP() + " XP"});
     }
+    
+//    for (RiwayatPenugasan r : Performia.listRiwayat) {
+//        model.addRow(new Object[]{
+//            r.getTanggal(),
+//            r.getNamaTugas(),
+//            r.getSkorXP() + " XP"
+//        });
+//    }
+    
 }
     /**
      * This method is called from within the constructor to initialize the form.

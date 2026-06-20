@@ -18,6 +18,7 @@ public class Tugas {
     private LocalDate tanggalBatas;
     private LocalDate tanggalDikumpulkan;
     private String status;
+    private int skorXP;
 
     public Tugas() {
 
@@ -28,19 +29,20 @@ public class Tugas {
             String judul,
             LocalDate tanggalDibuat,
             LocalDate tanggalBatas,
-            String status) {
+            String status, int skorXP) {
 
         this.idTugas = idTugas;
         this.judul = judul;
         this.tanggalDibuat = tanggalDibuat;
         this.tanggalBatas = tanggalBatas;
         this.status = status;
+        this.skorXP = skorXP;
     }
 
     public String getIdTugas() {
         return idTugas;
     }
-
+    
     public String getJudul() {
         return judul;
     }
@@ -64,7 +66,15 @@ public class Tugas {
     public LocalDate getTanggalDikumpulkan(){
         return tanggalDikumpulkan;
     }
-     public void setTanggalDikumpulkan(){
+    public void setTanggalDikumpulkan(){
          this.tanggalDikumpulkan = LocalDate.now();
-     }
+    }
+    
+    public void setSkorXP(){
+        this.skorXP = skorXP;
+    }
+    public int getSkorXP(){
+        return skorXP;
+    }
+     
 }
