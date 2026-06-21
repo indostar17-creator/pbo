@@ -11,10 +11,9 @@ package com.mycompany.performia;
 public class Ranking {
     private String periode;
     private String namaKaryawan;
-    private int skorAkhir; // Menyimpan totalXP sebagai Skor Akhir
+    private int skorAkhir;
     private Reward rewardYangDidapat;
 
-    // Constructor yang mencocokkan parameter di PanelRanking_GUI kamu
     public Ranking(String periode, String namaKaryawan, int skorAkhir, Reward rewardYangDidapat) {
         this.periode = periode;
         this.namaKaryawan = namaKaryawan;
@@ -22,7 +21,6 @@ public class Ranking {
         this.rewardYangDidapat = rewardYangDidapat;
     }
 
-    // Method Getter yang kamu panggil di baris model.addRow(...)
     public String getNamaKaryawan() {
         return namaKaryawan;
     }
@@ -39,7 +37,6 @@ public class Ranking {
         return rewardYangDidapat;
     }
 
-    // Method Setter (Opsional, jika sewaktu-waktu data perlu diubah)
     public void setNamaKaryawan(String namaKaryawan) {
         this.namaKaryawan = namaKaryawan;
     }

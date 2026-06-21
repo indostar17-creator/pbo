@@ -13,7 +13,7 @@ public class Pengumuman {
     private String judul;
     private String isi;
     
-    Pengumuman(String idPEngumuman, String judul, String isi){
+    Pengumuman(String idPengumuman, String judul, String isi){
         this.idPengumuman = idPengumuman;
         this.judul = judul;
         this.isi = isi;

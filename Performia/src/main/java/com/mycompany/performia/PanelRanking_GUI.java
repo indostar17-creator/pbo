@@ -19,42 +19,32 @@ public class PanelRanking_GUI extends javax.swing.JPanel {
     public PanelRanking_GUI() {
         initComponents();
         
-        // JALAN PERTAMA KALI: Muat data saat objek pertama kali dibuat
         loadRankingData();
         
-        // JALAN SETIAP DIKLIKS/DIBUKA: Trigger otomatis setiap kali panel ini ditampilkan kembali di layar
         addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 loadRankingData();
             }
         });
     }
 
-    /**
-     * Method untuk mengambil, mengurutkan, dan menampilkan data ke JTable
-     */
     public void loadRankingData() {
-        // Tarik model tabelnya
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jtRanking.getModel();
         
         // Bersihkan seluruh baris lama agar data tidak menumpuk/double saat di-refresh
         model.setRowCount(0);
 
-        // 1. Salin data dari listKaryawan yang ada di memori Performia.java
         ArrayList<Karyawan> sortedKaryawan = new ArrayList<>(Performia.listKaryawan);
-
-        // 2. Urutkan data berdasarkan TotalXP secara Descending (tertinggi ke terendah)
         Collections.sort(sortedKaryawan, new Comparator<Karyawan>() {
             public int compare(Karyawan k1, Karyawan k2) {
                 return Integer.compare(k2.getTotalXP(), k1.getTotalXP());
             }
         });
 
-        // 3. Masukkan data hasil urutan terbaru ke dalam JTable
         for (int i = 0; i < sortedKaryawan.size(); i++) {
             Karyawan k = sortedKaryawan.get(i);
             
-            // Tentukan reward berdasarkan posisi ranking terbaru
             Reward reward;
             if (i == 0) {
                 reward = new Reward("R01", "Bonus Rp 1.000.000");
@@ -66,7 +56,6 @@ public class PanelRanking_GUI extends javax.swing.JPanel {
                 reward = new Reward("R00", "Tidak ada bonus");
             }
             
-            // Bungkus ke objek Ranking
             Ranking rank = new Ranking("Juni 2026", k.getNama(), k.getTotalXP(), reward);
             
             // Masukkan baris baru ke JTable
